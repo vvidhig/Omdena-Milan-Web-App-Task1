@@ -1,26 +1,38 @@
 import pickle
 import numpy as np
+from data_fetcher import DataFetcher
 
 # Load the trained model
-with open('XGBClassifier_Pipeline_Optuna_Vidhi.pkl', 'rb') as f:
+with open('model.pkl', 'rb') as f:
     model = pickle.load(f)
 
-def predict(features):
+# Initialize DataFetcher
+data_fetcher = DataFetcher('data.csv')
+
+def predict(latitude, longitude):
+    # Fetch additional data based on latitude and longitude
+    additional_data = data_fetcher.fetch_data(latitude, longitude)
+
+    if additional_data is None:
+        return "No data found for the given latitude and longitude."
+
     # Prepare the input data for the model
     input_data = np.array([[
-        features['Zone'],
-        features['NDVI'],
-        features['landuse'],
-        features['LST'],
-        features['NDBI'],
-        features['NDWI'],
-        features['Roughness'],
-        features['SAVI'],
-        features['Slope'],
-        features['SMI'],
-        features['solar_radiation']
+        latitude,
+        longitude,
+        additional_data['Zone'],
+        additional_data['NDVI'],
+        additional_data['landuse'],
+        additional_data['LST'],
+        additional_data['NDBI'],
+        additional_data['NDWI'],
+        additional_data['Roughness'],
+        additional_data['SAVI'],
+        additional_data['Slope'],
+        additional_data['SMI'],
+        additional_data['solar_radiation']
     ]])
 
     # Make the prediction
     prediction = model.predict(input_data)
-    return prediction
+    return prediction[0]

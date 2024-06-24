@@ -3,7 +3,7 @@ from data_fetcher import DataFetcher
 from predict import predict
 
 # Initialize DataFetcher
-data_fetcher = DataFetcher('data.csv')
+data_fetcher = DataFetcher('dataset/Merged_2014.csv')
 
 # Define the Streamlit app
 def main():
