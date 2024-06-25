@@ -12,7 +12,7 @@ class DataFetcher:
         row = self.data.loc[self.data['distance'].idxmin()]
 
         # Check if the distance is within an acceptable tolerance (e.g., 0.01 degrees)
-        tolerance = 0.01
+        tolerance = 0.02
         if row['distance'] > tolerance:
             return None
         return row.to_dict()
