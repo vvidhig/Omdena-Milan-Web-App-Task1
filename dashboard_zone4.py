@@ -111,29 +111,6 @@ for feature in numerical_features:
         fig = px.imshow(corr, text_auto=True, aspect="auto", color_continuous_scale=px.colors.diverging.Tealrose)
         st.plotly_chart(fig, use_container_width=True)
 
-    # Pair Plot
-    with col2:
-        st.write(f"Pair Plot of {feature}")
-        fig = sns.pairplot(zone_4_df[numerical_features])
-        st.pyplot(fig)
-
-    # Q-Q Plot
-    with col3:
-        st.write(f"Q-Q Plot of {feature}")
-        fig, ax = plt.subplots()
-        stats.probplot(zone_4_df[feature], dist="norm", plot=ax)
-        st.pyplot(fig)
-
-    # CDF Plot
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.write(f"CDF Plot of {feature}")
-        sorted_data = np.sort(zone_4_df[feature])
-        yvals = np.arange(len(sorted_data)) / float(len(sorted_data) - 1)
-        fig, ax = plt.subplots()
-        ax.plot(sorted_data, yvals)
-        st.pyplot(fig)
-
     # Pie Chart
     with col2:
         st.write(f"Pie Chart of {feature}")
