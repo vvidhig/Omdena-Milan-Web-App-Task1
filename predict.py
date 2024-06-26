@@ -9,7 +9,7 @@ with open('XGBClassifier_Pipeline_Optuna_Vidhi.pkl', 'rb') as f:
 
 # Initialize DataFetcher
 # data_fetcher = DataFetcher('dataset/Merged_2014.csv')
-data_fetcher = DataFetcher('dataset/MergedData_2023.csv.csv')
+data_fetcher = DataFetcher('dataset/MergedData_2023.csv')
 
 
 def predict(latitude, longitude):

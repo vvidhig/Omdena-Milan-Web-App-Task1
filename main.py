@@ -14,7 +14,7 @@ def get_base64_of_bin_file(bin_file):
 
 # Function to embed base64 image in CSS
 def set_background_image():
-    image_path = "D:/Heritage Institute of Technology,Kolkata/Omdena/Omdena-Milan-Web-App/image/img2.jpeg"
+    image_path = "Images/predict_bg.jpg"
     encoded_image = get_base64_of_bin_file(image_path)
     image_css = f"""
         <style>

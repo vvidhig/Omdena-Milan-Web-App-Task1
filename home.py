@@ -7,7 +7,7 @@ def get_base64_of_bin_file(bin_file):
     return base64.b64encode(data).decode()
 
 def set_background_image():
-    image_path = "D:/Heritage Institute of Technology,Kolkata/Omdena/Omdena-Milan-Web-App/image/img2.jpeg"
+    image_path = "Images/predict_bg.jpg"
     encoded_image = get_base64_of_bin_file(image_path)
     image_css = f"""
         <style>
@@ -32,7 +32,7 @@ def app():
     - **Agricultural Suitability Prediction**: Input latitude and longitude to check the suitability of the area for agriculture.
     """)
 
-    st.image("D:\Heritage Institute of Technology,Kolkata\Omdena\Omdena-Milan-Web-App\image\img.jpg", caption="Agricultural Land")  # Replace with your image URL
+    st.image("Images/home_page.jpg", caption="Agricultural Land")  # Replace with your image URL
 
     # if st.button("Go to Latitude and Longitude Suitability"):
     #     st.experimental_set_query_params(page="suitability")
