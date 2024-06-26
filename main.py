@@ -1,10 +1,9 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-import home
-import suitability
-import eda
-import about
 import base64
+import dashboard_zone4  # Import the module for Zone 4 dashboard
+import dashboard_zone9  # Import the module for Zone 9 dashboard
+
 
 # Function to convert image to base64
 def get_base64_of_bin_file(bin_file):
@@ -26,7 +25,6 @@ def set_background_image():
     """
     st.markdown(image_css, unsafe_allow_html=True)
 
-
 st.set_page_config(
     page_title="Agriculture Suitability Analysis",
     page_icon="🌾",
@@ -40,8 +38,8 @@ set_background_image()
 with st.sidebar:
     selected_page = option_menu(
         menu_title='Navigation',
-        options=['Home', 'Agricultural suitability', 'EDA', 'About'],
-        icons=['house-fill', 'trophy-fill', 'chat-fill', 'info-circle-fill'],
+        options=['Home', 'Agricultural suitability', 'EDA for Zone 4', 'EDA for Zone 9', 'About'],
+        icons=['house-fill', 'trophy-fill', 'chat-fill', 'chat-fill', 'info-circle-fill'],
         menu_icon='chat-text-fill',
         default_index=0,
         styles={
@@ -52,17 +50,20 @@ with st.sidebar:
         }
     )
 
-# Function to navigate to the selected page
+# Function to load the selected page
 def load_page(page):
     if page == "Home":
-        home.app()
+        st.write("Welcome to the Home Page")
     elif page == "Agricultural suitability":
-        suitability.app()
-    elif page == "EDA":
-        eda.app()
+        st.write("Displaying Agricultural Suitability Page")
+    elif page == "EDA for Zone 4":
+        st.write("Loading EDA Dashboard for Zone 4")
+        dashboard_zone4.show_dashboard_zone4()  # Call the function from dashboard_zone4.py
+    elif page == "EDA for Zone 9":
+        st.write("Loading EDA Dashboard for Zone 9")
+        dashboard_zone9.show_dashboard_zone9()
     elif page == "About":
-        about.app()
+        st.write("Displaying About Page")
 
 # Load the selected page
 load_page(selected_page)
-
