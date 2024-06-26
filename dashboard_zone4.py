@@ -1,12 +1,6 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import altair as alt
 import plotly.express as px
-import folium
-from streamlit_folium import folium_static
-from branca.colormap import LinearColormap
 
 # Set page config
 st.set_page_config(layout="wide", page_title="Zone 4 Dashboard")
@@ -14,13 +8,21 @@ st.set_page_config(layout="wide", page_title="Zone 4 Dashboard")
 # Custom CSS to improve appearance
 st.markdown("""
 <style>
+body {
+    background-color: white;
+    color: black;
+}
 .big-font {
     font-size:30px !important;
     font-weight: bold;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
 }
 .medium-font {
     font-size:24px !important;
     font-weight: bold;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -58,36 +60,14 @@ for feature in numerical_features:
     # 1. Histogram (Distplot)
     with col1:
         st.write(f"Histogram of {feature}")
-        fig = px.histogram(zone_4_df, x=feature, marginal="box")
+        fig = px.histogram(zone_4_df, x=feature, marginal="box", color_discrete_sequence=[px.colors.qualitative.Set3[0]])
         st.plotly_chart(fig, use_container_width=True)
 
-    # 2. Map
+    # 2. Scatter Plot
     with col2:
-        st.write(f"Map of {feature}")
-        map_center = [zone_4_df['Latitude'].mean(), zone_4_df['Longitude'].mean()]
-        m = folium.Map(location=map_center, zoom_start=12)
-
-        # Create a color map
-        colormap = LinearColormap(colors=['blue', 'green', 'yellow', 'red'], 
-                                  vmin=zone_4_df[feature].min(), 
-                                  vmax=zone_4_df[feature].max())
-
-        # Add markers to the map
-        for _, row in zone_4_df.iterrows():
-            folium.CircleMarker(
-                location=[row['Latitude'], row['Longitude']],
-                radius=5,
-                popup=f"{feature}: {row[feature]:.2f}",
-                color=colormap(row[feature]),
-                fill=True,
-                fill_color=colormap(row[feature])
-            ).add_to(m)
-
-        # Add colormap to the map
-        colormap.add_to(m)
-
-        # Display the map
-        folium_static(m)
+        st.write(f"Scatter Plot of {feature}")
+        fig = px.scatter(zone_4_df, x='Latitude', y='Longitude', color=feature, color_continuous_scale=px.colors.diverging.Tealrose, title=f'{feature} Scatter Plot')
+        st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("---")  # Separator between sections
 
@@ -98,16 +78,15 @@ st.write(zone_4_df[numerical_features].describe())
 # Correlation Heatmap
 st.markdown('<p class="medium-font">Correlation Heatmap</p>', unsafe_allow_html=True)
 corr = zone_4_df[numerical_features].corr()
-fig = px.imshow(corr, text_auto=True, aspect="auto")
+fig = px.imshow(corr, text_auto=True, aspect="auto", color_continuous_scale=px.colors.diverging.Tealrose)
 st.plotly_chart(fig, use_container_width=True)
 
 # 3D Scatter Plot
 st.markdown('<p class="medium-font">3D Scatter Plot</p>', unsafe_allow_html=True)
-fig = px.scatter_3d(zone_4_df, x='SMI', y='NDVI', z='LST', color='solar_radiation')
+fig = px.scatter_3d(zone_4_df, x='SMI', y='NDVI', z='LST', color='solar_radiation', color_continuous_scale=px.colors.diverging.Tealrose)
 st.plotly_chart(fig, use_container_width=True)
 
 # Parallel Coordinates Plot
 st.markdown('<p class="medium-font">Parallel Coordinates Plot</p>', unsafe_allow_html=True)
-fig = px.parallel_coordinates(zone_4_df, color="solar_radiation", labels=numerical_features,
-                             color_continuous_scale=px.colors.diverging.Tealrose)
+fig = px.parallel_coordinates(zone_4_df, color="solar_radiation", labels=numerical_features, color_continuous_scale=px.colors.diverging.Tealrose)
 st.plotly_chart(fig, use_container_width=True)
