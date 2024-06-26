@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 import altair as alt
-import pydeck as pdk
 
 # Load data
 df = pd.read_csv('dataset/Merged_2014.csv')
@@ -16,45 +17,40 @@ st.title("Dashboard for Zone 4")
 st.subheader("Data")
 st.write(zone_4_df)
 
-# Rename columns for compatibility with Streamlit's map function
-zone_4_df = zone_4_df.rename(columns={'Latitude': 'latitude', 'Longitude': 'longitude'})
+# Generate visualizations for numerical features
+st.subheader("Visualizations for Numerical Features")
 
-# Generate scatter plot for geographical data with colored points
-st.subheader("Geographical Distribution")
-layer = pdk.Layer(
-    "ScatterplotLayer",
-    data=zone_4_df,
-    get_position='[longitude, latitude]',
-    get_color='[SMI * 255, NDBI * 255, Roughness * 255, Slope * 255]',  # Adjust colors based on numerical values
-    get_radius=200,
-    pickable=True
-)
+numerical_features = ['SMI', 'NDBI', 'Roughness', 'Slope', 'NDVI', 'LST', 'NDWI', 'SAVI', 'solar_radiation']
 
-view_state = pdk.ViewState(
-    latitude=zone_4_df['latitude'].mean(),
-    longitude=zone_4_df['longitude'].mean(),
-    zoom=11,
-    pitch=50
-)
+for feature in numerical_features:
+    st.subheader(f"Analysis of {feature}")
 
-r = pdk.Deck(
-    map_style="mapbox://styles/mapbox/light-v9",
-    initial_view_state=view_state,
-    layers=[layer],
-    tooltip={"text": "{Zone}"}
-)
+    # Create two columns to place graphs side by side
+    col1, col2 = st.columns(2)
 
-st.pydeck_chart(r)
+    # 1. Histogram (Distplot)
+    with col1:
+        st.write(f"Histogram of {feature}")
+        fig, ax = plt.subplots()
+        sns.histplot(data=zone_4_df, x=feature, kde=True, ax=ax)
+        st.pyplot(fig)
 
-# Generate histograms for numerical features
-st.subheader("Numerical Feature Distributions")
+    # 2. Box Plot
+    with col2:
+        st.write(f"Box Plot of {feature}")
+        fig, ax = plt.subplots()
+        sns.boxplot(data=zone_4_df, y=feature, ax=ax)
+        st.pyplot(fig)
 
-for feature in ['SMI', 'NDBI', 'Roughness', 'Slope', 'NDVI', 'LST', 'NDWI', 'SAVI', 'solar_radiation']:
-    chart = alt.Chart(zone_4_df).mark_bar().encode(
-        alt.X(feature, bin=True),
-        y='count()',
-        color=alt.Color(feature, scale=alt.Scale(scheme='viridis'))  # Color bars based on feature value
-    ).properties(
-        title=f"Distribution of {feature}"
-    )
-    st.altair_chart(chart, use_container_width=True)
+    st.markdown("---")  # Separator between sections
+
+    # Create another row for additional visualizations if needed
+
+# Overall Summary Statistics
+st.subheader("Summary Statistics for All Numerical Features")
+st.write(zone_4_df[numerical_features].describe())
+
+# Pairplot
+st.subheader("Pairplot of All Numerical Features")
+fig = sns.pairplot(zone_4_df[numerical_features], diag_kind='kde')
+st.pyplot(fig)
