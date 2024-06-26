@@ -44,7 +44,7 @@ df = load_data()
 zone_4_df = df[df['Zone'] == 'zone4']
 
 # Numerical features
-numerical_features = ['SMI', 'NDBI', 'Roughness', 'Slope', 'NDVI', 'LST', 'NDWI', 'SAVI', 'solar_radiation']
+numerical_features = ['SMI', 'NDBI', 'Roughness', 'Slope', 'NDVI', 'NDWI', 'SAVI', 'solar_radiation']
 
 # Display Zone 4 data
 st.markdown('<p class="big-font">Dashboard for Zone 4</p>', unsafe_allow_html=True)
