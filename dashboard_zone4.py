@@ -1,6 +1,11 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy.stats as stats
+import altair as alt
 
 # Set page config
 st.set_page_config(layout="wide", page_title="Zone 4 Dashboard")
@@ -46,7 +51,11 @@ st.markdown('<p class="big-font">Dashboard for Zone 4</p>', unsafe_allow_html=Tr
 
 # Display data
 st.markdown('<p class="medium-font">Data Overview</p>', unsafe_allow_html=True)
-st.write(zone_4_df)
+st.write(zone_4_df, unsafe_allow_html=True)
+
+# Overall Summary Statistics
+st.markdown('<p class="medium-font">Summary Statistics for All Numerical Features</p>', unsafe_allow_html=True)
+st.write(zone_4_df[numerical_features].describe())
 
 # Generate visualizations for numerical features
 st.markdown('<p class="medium-font">Visualizations for Numerical Features</p>', unsafe_allow_html=True)
@@ -54,26 +63,86 @@ st.markdown('<p class="medium-font">Visualizations for Numerical Features</p>', 
 for feature in numerical_features:
     st.markdown(f'<p class="medium-font">Analysis of {feature}</p>', unsafe_allow_html=True)
 
-    # Create two columns to place graphs side by side
-    col1, col2 = st.columns(2)
+    # Create columns to place graphs side by side
+    col1, col2, col3 = st.columns(3)
 
-    # 1. Histogram (Distplot)
+    # Histogram
     with col1:
         st.write(f"Histogram of {feature}")
         fig = px.histogram(zone_4_df, x=feature, marginal="box", color_discrete_sequence=[px.colors.qualitative.Set3[0]])
         st.plotly_chart(fig, use_container_width=True)
 
-    # 2. Scatter Plot
+    # Box Plot
     with col2:
+        st.write(f"Box Plot of {feature}")
+        fig = px.box(zone_4_df, y=feature, color_discrete_sequence=[px.colors.qualitative.Set3[1]])
+        st.plotly_chart(fig, use_container_width=True)
+
+    # Scatter Plot
+    with col3:
         st.write(f"Scatter Plot of {feature}")
-        fig = px.scatter(zone_4_df, x='Latitude', y='Longitude', color=feature, color_continuous_scale=px.colors.diverging.Tealrose, title=f'{feature} Scatter Plot')
+        fig = px.scatter(zone_4_df, x='Latitude', y='Longitude', color=feature, color_continuous_scale=px.colors.diverging.Tealrose)
+        st.plotly_chart(fig, use_container_width=True)
+
+    # Line Plot
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.write(f"Line Plot of {feature}")
+        fig = px.line(zone_4_df.sort_values(by='Latitude'), x='Latitude', y=feature, color_discrete_sequence=[px.colors.qualitative.Set3[2]])
+        st.plotly_chart(fig, use_container_width=True)
+
+    # Bar Chart
+    with col2:
+        st.write(f"Bar Chart of {feature}")
+        fig = px.bar(zone_4_df, x='Latitude', y=feature, color_discrete_sequence=[px.colors.qualitative.Set3[3]])
+        st.plotly_chart(fig, use_container_width=True)
+
+    # Violin Plot
+    with col3:
+        st.write(f"Violin Plot of {feature}")
+        fig = px.violin(zone_4_df, y=feature, color_discrete_sequence=[px.colors.qualitative.Set3[4]])
+        st.plotly_chart(fig, use_container_width=True)
+
+    # Heat Map (Only for correlation with other features)
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.write(f"Heat Map of {feature} Correlation")
+        corr = zone_4_df[numerical_features].corr()
+        fig = px.imshow(corr, text_auto=True, aspect="auto", color_continuous_scale=px.colors.diverging.Tealrose)
+        st.plotly_chart(fig, use_container_width=True)
+
+    # Pair Plot
+    with col2:
+        st.write(f"Pair Plot of {feature}")
+        fig = sns.pairplot(zone_4_df[numerical_features])
+        st.pyplot(fig)
+
+    # Q-Q Plot
+    with col3:
+        st.write(f"Q-Q Plot of {feature}")
+        fig, ax = plt.subplots()
+        stats.probplot(zone_4_df[feature], dist="norm", plot=ax)
+        st.pyplot(fig)
+
+    # CDF Plot
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.write(f"CDF Plot of {feature}")
+        sorted_data = np.sort(zone_4_df[feature])
+        yvals = np.arange(len(sorted_data)) / float(len(sorted_data) - 1)
+        fig, ax = plt.subplots()
+        ax.plot(sorted_data, yvals)
+        st.pyplot(fig)
+
+    # Pie Chart
+    with col2:
+        st.write(f"Pie Chart of {feature}")
+        binned_data = pd.cut(zone_4_df[feature], bins=5).value_counts()
+        binned_data.index = binned_data.index.astype(str)  # Convert intervals to string
+        fig = px.pie(values=binned_data.values, names=binned_data.index, title=f'{feature} Distribution')
         st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("---")  # Separator between sections
-
-# Overall Summary Statistics
-st.markdown('<p class="medium-font">Summary Statistics for All Numerical Features</p>', unsafe_allow_html=True)
-st.write(zone_4_df[numerical_features].describe())
 
 # Correlation Heatmap
 st.markdown('<p class="medium-font">Correlation Heatmap</p>', unsafe_allow_html=True)
@@ -86,7 +155,3 @@ st.markdown('<p class="medium-font">3D Scatter Plot</p>', unsafe_allow_html=True
 fig = px.scatter_3d(zone_4_df, x='SMI', y='NDVI', z='LST', color='solar_radiation', color_continuous_scale=px.colors.diverging.Tealrose)
 st.plotly_chart(fig, use_container_width=True)
 
-# Parallel Coordinates Plot
-st.markdown('<p class="medium-font">Parallel Coordinates Plot</p>', unsafe_allow_html=True)
-fig = px.parallel_coordinates(zone_4_df, color="solar_radiation", labels=numerical_features, color_continuous_scale=px.colors.diverging.Tealrose)
-st.plotly_chart(fig, use_container_width=True)
