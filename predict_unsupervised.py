@@ -37,4 +37,7 @@ def predict_unsupervised(latitude, longitude):
     # Make the prediction
     prediction = model.predict(input_data)
 
-    return prediction[0]
+    if prediction[0] == 0:
+        st.markdown("<p style='color:red;'>The area is Not Suitable for Urban Farming</p>", unsafe_allow_html=True)
+    else:
+        st.markdown("<p style='color:green;'>The area is Suitable for Urban Farming</p>", unsafe_allow_html=True)
