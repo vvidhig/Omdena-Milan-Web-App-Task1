@@ -54,10 +54,8 @@ with st.sidebar:
 # Function to load the selected page
 def load_page(page):
     if page == "Home":
-        st.write("Welcome to the Home Page")
         home.app()
     elif page == "Agricultural suitability":
-        st.write("Displaying Agricultural Suitability Page")
         suitability_app()
     elif page == "EDA for Zone 4":
         st.write("Loading EDA Dashboard for Zone 4")
