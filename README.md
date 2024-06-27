@@ -5,11 +5,23 @@ Run the following
 - The main file of the web application
   
 ```
-python main.py
+streamlit run main.py
 ```
 
 - To view the dashboard (in-built) for Zone 4
 
 ```
-python dashboard_zone4.py
+streamlit run dashboard_zone4.py
 ```
+
+- To view the dashboard for Zone 9
+
+```
+streamlit run dasboard_zone9.py
+```
+
+- To just test the prediction made by Supervised Model
+
+```
+streamlit run latlong.py
+``` 
