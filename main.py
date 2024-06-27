@@ -66,8 +66,5 @@ def load_page(page):
     elif page == "About":
         st.write("Displaying About Page")
 
-# Load the selected page
-load_page(selected_page)
-
 if __name__ == "__main__":
     load_page(selected_page)
