@@ -39,4 +39,7 @@ def predict(latitude, longitude):
     # Make the prediction
     prediction = model.predict(input_data)
 
-    return prediction[0]
+    if prediction[0] == 0:
+        return "The area is Not Suitable for Urban Farming"
+    else:
+        return "The area is Suitable for Urban Farming"

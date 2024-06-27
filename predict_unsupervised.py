@@ -37,6 +37,6 @@ def predict_unsupervised(latitude, longitude):
     prediction = model.predict(input_data)
 
     if prediction[0] == 0:
-        return "The area is suitable for urban farming"
+        return "The area is Suitable for Urban Farming"
     else:
-        return "The area is not suitable for urban farming"
+        return "The area is Not Suitable for Urban Farming"
