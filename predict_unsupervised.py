@@ -4,7 +4,7 @@ import pandas as pd
 from data_fetcher import DataFetcher
 
 # Load the trained model
-with open('XGBClassifier_Pipeline_Optuna_Vidhi.pkl', 'rb') as f:
+with open('kmeans_model_pipeline.pkl', 'rb') as f:
     model = pickle.load(f)
 
 # Initialize DataFetcher
@@ -12,7 +12,7 @@ with open('XGBClassifier_Pipeline_Optuna_Vidhi.pkl', 'rb') as f:
 data_fetcher = DataFetcher('dataset/MergedData_2023.csv')
 
 
-def predict(latitude, longitude):
+def predict_unsupervised(latitude, longitude):
     # Fetch additional data based on latitude and longitude
     additional_data = data_fetcher.fetch_data(latitude, longitude)
 
@@ -21,9 +21,6 @@ def predict(latitude, longitude):
 
     # Prepare the input data for the model as a Pandas DataFrame
     input_data = pd.DataFrame({
-        'Latitude': [latitude],
-        'Longitude': [longitude],
-        'Zone': [additional_data['Zone']],
         'NDVI': [additional_data['NDVI']],
         'landuse': [additional_data['landuse']],
         'LST': [additional_data['LST']],
