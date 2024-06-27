@@ -58,10 +58,10 @@ def load_page(page):
         home.app()
     elif page == "Agricultural suitability":
         st.write("Displaying Agricultural Suitability Page")
-        suitability_app()  # Call the app function from suitability.py
+        suitability_app()
     elif page == "EDA for Zone 4":
         st.write("Loading EDA Dashboard for Zone 4")
-        dashboard_zone4.show_dashboard_zone4()  # Call the function from dashboard_zone4.py
+        dashboard_zone4.show_dashboard_zone4()
     elif page == "EDA for Zone 9":
         st.write("Loading EDA Dashboard for Zone 9")
         dashboard_zone9.show_dashboard_zone9()
