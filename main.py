@@ -4,7 +4,7 @@ import base64
 import home
 import dashboard_zone4  # Import the module for Zone 4 dashboard
 import dashboard_zone9  # Import the module for Zone 9 dashboard
-from app import main as agricultural_suitability_app  # Import the main function from app.py
+from suitability import app as suitability_app  # Import the app function from suitability.py
 
 # Function to convert image to base64
 def get_base64_of_bin_file(bin_file):
@@ -58,7 +58,7 @@ def load_page(page):
         home.app()
     elif page == "Agricultural suitability":
         st.write("Displaying Agricultural Suitability Page")
-        agricultural_suitability_app()
+        suitability_app()  # Call the app function from suitability.py
     elif page == "EDA for Zone 4":
         st.write("Loading EDA Dashboard for Zone 4")
         dashboard_zone4.show_dashboard_zone4()  # Call the function from dashboard_zone4.py
@@ -70,3 +70,6 @@ def load_page(page):
 
 # Load the selected page
 load_page(selected_page)
+
+if __name__ == "__main__":
+    load_page(selected_page)

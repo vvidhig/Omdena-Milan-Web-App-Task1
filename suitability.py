@@ -53,7 +53,7 @@ def app():
     st.map(map_data)
     
     # Prediction button (original)
-    if st.button("Predict"):
+    if st.button("Predict using Supervised Model"):
         prediction = predict(latitude, longitude)
         st.write("Prediction Result:")
         if isinstance(prediction, str):
@@ -63,14 +63,9 @@ def app():
         else:
             st.error("This area is not suitable for agriculture.")
     
-    # Predict using unsupervised model button
-    if st.button("Predict using Unsupervised Model"):
-        prediction = predict_unsupervised(latitude, longitude)
-        st.write("Prediction Result (Unsupervised Model):")
-        st.write(prediction)
     
     # Predict using supervised model button
-    if st.button("Predict using Supervised Model"):
+    if st.button("Predict using Unsupervised Model"):
         prediction = predict_supervised(latitude, longitude)
         st.write("Prediction Result (Supervised Model):")
         st.write(prediction)
