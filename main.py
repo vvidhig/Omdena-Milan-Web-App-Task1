@@ -5,6 +5,8 @@ import home
 import dashboard_zone4  # Import the module for Zone 4 dashboard
 import dashboard_zone9  # Import the module for Zone 9 dashboard
 from suitability import app as suitability_app  # Import the app function from suitability.py
+import warnings
+warnings.filterwarnings("ignore")
 
 # Function to convert image to base64
 def get_base64_of_bin_file(bin_file):
