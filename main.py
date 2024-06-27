@@ -1,9 +1,10 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import base64
+import home
 import dashboard_zone4  # Import the module for Zone 4 dashboard
 import dashboard_zone9  # Import the module for Zone 9 dashboard
-
+from app import main as agricultural_suitability_app  # Import the main function from app.py
 
 # Function to convert image to base64
 def get_base64_of_bin_file(bin_file):
@@ -54,8 +55,10 @@ with st.sidebar:
 def load_page(page):
     if page == "Home":
         st.write("Welcome to the Home Page")
+        home.app()
     elif page == "Agricultural suitability":
         st.write("Displaying Agricultural Suitability Page")
+        agricultural_suitability_app()
     elif page == "EDA for Zone 4":
         st.write("Loading EDA Dashboard for Zone 4")
         dashboard_zone4.show_dashboard_zone4()  # Call the function from dashboard_zone4.py
