@@ -44,13 +44,9 @@ def app():
     
     if st.button("Predict using Supervised Model"):
         prediction = predict_supervised(latitude, longitude)
-        st.write("Prediction Result (Supervised Model):")
-        st.write(prediction)
     
     if st.button("Predict using Unsupervised Model"):
         prediction = predict_unsupervised(latitude, longitude)
-        st.write("Prediction Result (Unsupervised Model):")
-        st.write(prediction)
 
 if __name__ == "__main__":
     app()

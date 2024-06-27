@@ -2,6 +2,7 @@ import pickle
 import numpy as np
 import pandas as pd
 from data_fetcher import DataFetcher
+import streamlit as st
 
 # Load the trained model
 with open('kmeans_model_pipeline.pkl', 'rb') as f:
@@ -37,6 +38,6 @@ def predict_unsupervised(latitude, longitude):
     prediction = model.predict(input_data)
 
     if prediction[0] == 0:
-        return "The area is Suitable for Urban Farming"
+        st.markdown("<p style='color:red;'>The area is Not Suitable for Urban Farming</p>", unsafe_allow_html=True)
     else:
-        return "The area is Not Suitable for Urban Farming"
+        st.markdown("<p style='color:green;'>The area is Suitable for Urban Farming</p>", unsafe_allow_html=True)
