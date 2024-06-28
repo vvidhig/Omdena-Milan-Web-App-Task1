@@ -5,7 +5,6 @@ import home
 import dashboard_zone4
 import dashboard_zone9
 from agricultural_suitability import app as suitability
-from suitability import app as suitability_app 
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
@@ -60,7 +59,6 @@ def load_page(page):
         home.app()
     elif page == "Agricultural suitability":
         suitability()
-        # suitability_app()
     elif page == "EDA for Zone 4":
         st.write("Loading EDA Dashboard for Zone 4")
         dashboard_zone4.show_dashboard_zone4()
