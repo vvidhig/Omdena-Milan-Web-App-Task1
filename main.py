@@ -41,7 +41,7 @@ set_background_image()
 with st.sidebar:
     selected_page = option_menu(
         menu_title='Navigation',
-        options=['Home', 'Agricultural suitability', 'EDA for Zone 4', 'EDA for Zone 9', 'About'],
+        options=['Home', 'Agricultural suitability', 'EDA for Zone 4', 'EDA for Zone 9', 'Contributors'],
         icons=['house-fill', 'trophy-fill', 'chat-fill', 'chat-fill', 'info-circle-fill'],
         menu_icon='chat-text-fill',
         default_index=0,

@@ -20,6 +20,6 @@ def set_background_image():
     st.markdown(image_css, unsafe_allow_html=True)
 def app():
     set_background_image
-    st.title("about Page")
-    st.write("This is the About page.")
+    st.title("Contributors' Page")
+    st.write("This is the Contributors' page.")
     # Add your account page logic here
