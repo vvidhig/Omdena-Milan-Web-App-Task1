@@ -1,6 +1,5 @@
+# suitability_supervised.py
 import streamlit as st
-import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 def app():
     st.title("Supervised Model Prediction")
@@ -12,5 +11,8 @@ def app():
     # st.write(f"Prediction result: {result}")
 
     if st.button("Go back"):
-        st.experimental_set_query_params(page="main")
-        st.experimental_rerun()
+        st.session_state.page = "main"
+        st.rerun()
+
+if __name__ == "__main__":
+    app()
