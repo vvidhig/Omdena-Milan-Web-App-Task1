@@ -30,7 +30,7 @@ def main_page():
     """)
     
     if st.button("Predict using Supervised Model"):
-        st.experimental_set_query_params(page="supervised")
+        st.set_query_params(page="supervised")
         st.experimental_rerun()
     
     st.write("""
@@ -41,7 +41,7 @@ def main_page():
     """)
     
     if st.button("Predict using Unsupervised Model"):
-        st.experimental_set_query_params(page="unsupervised")
+        st.set_query_params(page="unsupervised")
         st.experimental_rerun()
 
 def supervised_page():
