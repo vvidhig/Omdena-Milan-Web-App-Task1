@@ -1,6 +1,8 @@
 # main.py
 import streamlit as st
 import base64
+import warnings
+warnings.filterwarnings("ignore", DeprecationWarning)
 
 def set_background_image():
     image_path = "Images/predict_bg.jpg"
@@ -53,7 +55,7 @@ def unsupervised_page():
     suitability_unsupervised.app()
 
 def app():
-    query_params = st.query_params
+    query_params = st.experimental_get_query_params()
     if "page" in query_params:
         if query_params["page"][0] == "supervised":
             supervised_page()
