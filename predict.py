@@ -37,27 +37,27 @@ def predict(latitude, longitude):
 
         st.write("### Additional Features:")
         features = [
-            ('Zone', additional_data['Zone']),
-            ('NDVI', additional_data['NDVI']),
-            ('Land Use', additional_data['landuse']),
-            ('LST', additional_data['LST']),
-            ('NDBI', additional_data['NDBI']),
-            ('NDWI', additional_data['NDWI']),
-            ('Roughness', additional_data['Roughness']),
-            ('SAVI', additional_data['SAVI']),
-            ('Slope', additional_data['Slope']),
-            ('SMI', additional_data['SMI']),
-            ('Solar Radiation', additional_data['solar_radiation'])
+            ('Zone', f"{additional_data['Zone']}"),
+            ('NDVI', f"{additional_data['NDVI']:.6f}"),
+            ('Land Use', f"{additional_data['landuse']}"),
+            ('LST', f"{additional_data['LST']:.6f}"),
+            ('NDBI', f"{additional_data['NDBI']:.6f}"),
+            ('NDWI', f"{additional_data['NDWI']:.6f}"),
+            ('Roughness', f"{additional_data['Roughness']:.6f}"),
+            ('SAVI', f"{additional_data['SAVI']:.6f}"),
+            ('Slope', f"{additional_data['Slope']:.6f}"),
+            ('SMI', f"{additional_data['SMI']:.6f}"),
+            ('Solar Radiation', f"{additional_data['solar_radiation']:.6f}")
         ]
 
         cols = st.columns(3)
         for i, (name, value) in enumerate(features):
-            cols[i % 3].metric(label=name, value=value)
+            cols[i % 3].write(f"**{name}:** {value}")
 
         # Make the prediction
         prediction = model.predict(input_data)
 
         if prediction[0] == 0:
-            st.error("The area is Not Suitable for Urban Farming", unsafe_allow_html=True)
+            st.error("The area is Not Suitable for Urban Farming")
         else:
-            st.success("The area is Suitable for Urban Farming", unsafe_allow_html=True)
+            st.success("The area is Suitable for Urban Farming")
