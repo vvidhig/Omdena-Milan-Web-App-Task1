@@ -18,7 +18,7 @@ def predict(latitude, longitude):
     additional_data = data_fetcher.fetch_data(latitude, longitude)
 
     if additional_data is None:
-        return "No data found for the given latitude and longitude."
+        st.error("No data found for the given latitude and longitude.")
 
     # Prepare the input data for the model as a Pandas DataFrame
     input_data = pd.DataFrame({
@@ -37,6 +37,24 @@ def predict(latitude, longitude):
         'solar_radiation': [additional_data['solar_radiation']]
     })
 
+    st.write("### Additional Features:")
+    features = [
+        ('Zone', additional_data['Zone']),
+        ('NDVI', additional_data['NDVI']),
+        ('Land Use', additional_data['landuse']),
+        ('LST', additional_data['LST']),
+        ('NDBI', additional_data['NDBI']),
+        ('NDWI', additional_data['NDWI']),
+        ('Roughness', additional_data['Roughness']),
+        ('SAVI', additional_data['SAVI']),
+        ('Slope', additional_data['Slope']),
+        ('SMI', additional_data['SMI']),
+        ('Solar Radiation', additional_data['solar_radiation'])
+    ]
+
+    cols = st.columns(3)
+    for i, (name, value) in enumerate(features):
+        cols[i % 2].metric(label=name, value=value)
     # Make the prediction
     prediction = model.predict(input_data)
 
