@@ -2,9 +2,10 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import base64
 import home
-import dashboard_zone4  # Import the module for Zone 4 dashboard
-import dashboard_zone9  # Import the module for Zone 9 dashboard
-from suitability import app as suitability_app  # Import the app function from suitability.py
+import dashboard_zone4
+import dashboard_zone9
+from agricultural_suitability import app as suitability
+from suitability import app as suitability_app 
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -58,7 +59,8 @@ def load_page(page):
     if page == "Home":
         home.app()
     elif page == "Agricultural suitability":
-        suitability_app()
+        suitability()
+        # suitability_app()
     elif page == "EDA for Zone 4":
         st.write("Loading EDA Dashboard for Zone 4")
         dashboard_zone4.show_dashboard_zone4()

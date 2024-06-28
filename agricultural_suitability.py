@@ -1,23 +1,5 @@
 import streamlit as st
-
-def set_background_image():
-    image_path = "Images/predict_bg.jpg"
-    with open(image_path, 'rb') as f:
-        data = f.read()
-    encoded_image = base64.b64encode(data).decode()
-    image_css = f"""
-        <style>
-        body {{
-            background-image: url('data:image/jpeg;base64,{encoded_image}');
-            background-size: cover;
-        }}
-        </style>
-    """
-    st.markdown(image_css, unsafe_allow_html=True)
-
 def app():
-    set_background_image()
-    
     st.title("Agriculture Suitability Prediction")
     
     st.write("""
