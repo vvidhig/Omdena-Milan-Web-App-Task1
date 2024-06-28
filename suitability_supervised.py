@@ -21,7 +21,7 @@ def app():
     st.write("Location on Map:")
     st.map(map_data)
     
-    if st.button("Predict using Supervised Model"):
+    if st.button("Predict"):
         prediction = predict_supervised(latitude, longitude)
         
     if st.button("Go back"):
