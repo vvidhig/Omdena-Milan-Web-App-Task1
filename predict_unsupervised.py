@@ -11,7 +11,7 @@ with open('kmeans_model_pipeline.pkl', 'rb') as f:
 # Initialize DataFetcher
 data_fetcher = DataFetcher('dataset/MergedData_2023.csv')
 
-def predict(latitude, longitude):
+def predict_unsupervised(latitude, longitude):
     # Fetch additional data based on latitude and longitude
     additional_data = data_fetcher.fetch_data(latitude, longitude)
 

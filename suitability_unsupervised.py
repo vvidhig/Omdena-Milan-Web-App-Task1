@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
 from predict_unsupervised import predict_unsupervised
 from data_fetcher import DataFetcher
 
