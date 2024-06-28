@@ -7,7 +7,7 @@ import dashboard_zone9
 from agricultural_suitability import app as suitability
 from suitability import app as suitability_app 
 import warnings
-warnings.filterwarnings("ignore")
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 # Function to convert image to base64
 def get_base64_of_bin_file(bin_file):

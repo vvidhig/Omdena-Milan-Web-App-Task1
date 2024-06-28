@@ -1,8 +1,10 @@
 import streamlit as st
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 def app():
     st.title("Unsupervised Model Prediction")
-    st.write("Here, you can add the code to perform the prediction using the KMeans model.")
+    st.write("Here, you can add the code to perform the prediction using the XGBClassifier model.")
     
     # Add your prediction code here
     # Example:

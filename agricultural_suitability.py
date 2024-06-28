@@ -1,27 +1,9 @@
 # main.py
 import streamlit as st
-import base64
 import warnings
-warnings.filterwarnings("ignore", DeprecationWarning)
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-def set_background_image():
-    image_path = "Images/predict_bg.jpg"
-    with open(image_path, 'rb') as f:
-        data = f.read()
-    encoded_image = base64.b64encode(data).decode()
-    image_css = f"""
-        <style>
-        body {{
-            background-image: url('data:image/jpeg;base64,{encoded_image}');
-            background-size: cover;
-        }}
-        </style>
-    """
-    st.markdown(image_css, unsafe_allow_html=True)
-
-def main_page():
-    set_background_image()
-    
+def main_page():    
     st.title("Agriculture Suitability Prediction")
     
     st.write("""
@@ -32,8 +14,8 @@ def main_page():
     """)
     
     if st.button("Predict using Supervised Model"):
-        st.experimental_set_query_params(page="supervised")
-        st.experimental_rerun()
+        st.query_params.update({"page": "supervised"})
+        st.rerun()
     
     st.write("""
     ### KMeans Model
@@ -43,8 +25,8 @@ def main_page():
     """)
     
     if st.button("Predict using Unsupervised Model"):
-        st.experimental_set_query_params(page="unsupervised")
-        st.experimental_rerun()
+        st.query_params.update({"page": "unsupervised"})
+        st.rerun()
 
 def supervised_page():
     import suitability_supervised
@@ -55,11 +37,10 @@ def unsupervised_page():
     suitability_unsupervised.app()
 
 def app():
-    query_params = st.experimental_get_query_params()
-    if "page" in query_params:
-        if query_params["page"][0] == "supervised":
+    if "page" in st.query_params:
+        if st.query_params["page"] == "supervised":
             supervised_page()
-        elif query_params["page"][0] == "unsupervised":
+        elif st.query_params["page"] == "unsupervised":
             unsupervised_page()
         else:
             main_page()

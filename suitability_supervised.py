@@ -1,5 +1,6 @@
-# predict_supervised.py
 import streamlit as st
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 def app():
     st.title("Supervised Model Prediction")
