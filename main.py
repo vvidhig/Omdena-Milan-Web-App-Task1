@@ -28,11 +28,9 @@ def set_background_and_text_color(png_file):
         background-position: center;
         background-repeat: no-repeat;
     }
-    /* Set all text to black */
     body, .stApp, p, h1, h2, h3, h4, h5, h6 {
         color: black !important;
     }
-    /* Style for input boxes, dropdowns, number inputs, and buttons */
     .stTextInput > div > div > input, 
     .stButton > button,
     .stNumberInputContainer > div > div > div > button {
@@ -40,11 +38,6 @@ def set_background_and_text_color(png_file):
         color: black !important;
         border: 1px solid rgba(0,0,0,0.2);
     }
-    /* Style for number input container */
-    .stNumberInputContainer > div > div {
-        background-color: rgb(100,152,71) !important;
-    }
-    /* Style for slider */
     .stSlider > div > div > div > div {
         background-color: rgb(100,152,71) !important;
     }
@@ -58,6 +51,7 @@ def set_background_and_text_color(png_file):
 # Example usage with your background image
 set_background_and_text_color('Images/bg.png')
 
+
 # Sidebar navigation
 with st.sidebar:
     selected_page = option_menu(
@@ -67,10 +61,10 @@ with st.sidebar:
         menu_icon='chat-text-fill',
         default_index=0,
         styles={
-            "container": {"padding": "5!important", "background-color": 'black'},
-            "icon": {"color": "white", "font-size": "23px"},
-            "nav-link": {"color":"white", "font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "blue"},
-            "nav-link-selected": {"background-color": "#02ab21"},
+            "container": {"padding": "5!important", "background-color": '#A5D97E'},
+            "icon": {"color": "white", "font-size": "20px"},
+            "nav-link": {"color":"white", "font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#71A75E"},
+            "nav-link-selected": {"background-color": "#71A75E"},
         }
     )
 
