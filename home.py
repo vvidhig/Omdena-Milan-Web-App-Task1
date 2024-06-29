@@ -11,8 +11,6 @@ def app():
     - **Agricultural Suitability Prediction**: Input latitude and longitude to check the suitability of the area for agriculture.
     """)
 
-    st.image("Images/home_page.jpg", caption="Agricultural Land")  # Replace with your image URL
-
     # if st.button("Go to Latitude and Longitude Suitability"):
     #     st.experimental_set_query_params(page="suitability")
 

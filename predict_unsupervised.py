@@ -5,7 +5,7 @@ import streamlit as st
 from data_fetcher import DataFetcher
 
 # Load the trained model
-with open('kmeans_model_pipeline_Sneha.pkl', 'rb') as f:
+with open('models/kmeans_model_pipeline_Sneha.pkl', 'rb') as f:
     model = pickle.load(f)
 
 # Initialize DataFetcher
