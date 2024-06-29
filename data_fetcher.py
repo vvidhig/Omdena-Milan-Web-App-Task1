@@ -7,7 +7,7 @@ class DataFetcher:
 
     def fetch_data(self, latitude, longitude):
         # Calculate the distance between the given lat/lon and the dataset lat/lon
-        self.data['distance'] = np.sqrt((self.data['Latitude'] - latitude)**2 + (self.data['Longitude'] - longitude)**2)
+        self.data['distance'] = np.sqrt((self.data['latitude'] - latitude)**2 + (self.data['longitude'] - longitude)**2)
         # Find the row with the minimum distance
         row = self.data.loc[self.data['distance'].idxmin()]
 

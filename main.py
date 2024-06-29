@@ -1,8 +1,9 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import base64
-import home
+import A_home
 from C_agricultural_suitability import app as suitability
+from D_contact import contact_page as Contacts
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
@@ -33,13 +34,13 @@ with st.sidebar:
 # Function to load the selected page
 def load_page(page):
     if page == "Home":
-        home.app()
+        A_home.app()
     elif page == "Agricultural suitability":
         suitability()
     elif page == "EDA":
         st.write("This page will contain the EDA")
     elif page == "About":
-        st.write("Displaying About Page")
+        Contacts()
 
 if __name__ == "__main__":
     load_page(selected_page)
