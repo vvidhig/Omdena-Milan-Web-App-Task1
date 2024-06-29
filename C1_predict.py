@@ -57,6 +57,10 @@ def run_app():
 
     # Model mapping
     model = supervised_model if model_type == 'Supervised Model : XGBClassifier' else unsupervised_model
+    
+    map_data = pd.DataFrame({'lat': [latitude], 'lon': [longitude]})
+    st.write("Location on Map:")
+    st.map(map_data)
 
     # Predict button
     if st.button('Predict'):
@@ -95,6 +99,10 @@ def run_app():
             suitability = 'Not Suitable' if prediction in [1, 2, 3] else 'Suitable'
 
         st.write(f'The land is {suitability} for urban farming.')
+        
+    if st.button("Go back"):
+        st.session_state.page = "main"
+        st.rerun()
 
 if __name__ == '__main__':
     run_app()

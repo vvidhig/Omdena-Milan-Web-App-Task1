@@ -1,5 +1,6 @@
 import streamlit as st
 from C1_predict import run_app as predict_using_all
+from C2_predict import app as predict_using_latlong
 
 def main_page():
     st.title("Agriculture Suitability Prediction")
@@ -25,9 +26,9 @@ def predict_using_all():
     import  C1_predict
     C1_predict.run_app()
 
-def unsupervised_page():
-    import suitability_unsupervised
-    suitability_unsupervised.app()
+def predict_using_latlong():
+    import C2_predict
+    C2_predict.app()
 
 def app():
     if 'page' not in st.session_state:
@@ -36,7 +37,7 @@ def app():
     if st.session_state.page == "supervised":
         predict_using_all()
     elif st.session_state.page == "unsupervised":
-        unsupervised_page()
+        predict_using_latlong()
     else:
         main_page()
 

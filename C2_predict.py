@@ -1,10 +1,11 @@
 import streamlit as st
 import pandas as pd
 from predict_supervised import predict as predict_supervised
+from predict_unsupervised import predict_unsupervised
 from data_fetcher import DataFetcher
 
 def app():
-    st.title("Supervised Model Prediction")
+    st.title("Predict using Latitude and Longitude")
 
     st.write("""
     Enter the latitude and longitude to predict whether the area is suitable for agriculture.
@@ -20,8 +21,13 @@ def app():
     st.write("Location on Map:")
     st.map(map_data)
     
-    if st.button("Predict"):
-        prediction = predict_supervised(latitude, longitude)
+    model_type = st.selectbox('Select Model', ['Supervised Model : XGBClassifier', 'Unsupervised Model : KmeansClassifier'])
+
+    if st.button('Predict'):
+        if model_type == 'Supervised Model : XGBClassifier':
+            prediction = predict_supervised(latitude, longitude)
+        else:
+            prediction = predict_unsupervised(latitude, longitude)
         
     if st.button("Go back"):
         st.session_state.page = "main"
