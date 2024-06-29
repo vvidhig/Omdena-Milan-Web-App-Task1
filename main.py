@@ -57,14 +57,16 @@ with st.sidebar:
     selected_page = option_menu(
         menu_title='Navigation',
         options=['Home','EDA Dashboard', 'Find Suitable Area of Urban Farming', 'Contacts'],
-        icons=['house-fill', 'trophy-fill', 'chat-fill', 'chat-fill', 'info-circle-fill'],
+        icons=['house-fill', 'trophy-fill', 'chat-fill', 'info-circle-fill'],
         menu_icon='chat-text-fill',
         default_index=0,
         styles={
             "container": {"padding": "5!important", "background-color": '#A5D97E'},
-            "icon": {"color": "white", "font-size": "20px"},
-            "nav-link": {"color":"white", "font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#71A75E"},
+            "icon": {"color": "black", "font-size": "20px"},
+            "nav-link": {"color":"black", "font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#71A75E"},
             "nav-link-selected": {"background-color": "#71A75E"},
+            "menu-title": {"color": "black"},
+            "menu-icon": {"color": "black"}
         }
     )
 
