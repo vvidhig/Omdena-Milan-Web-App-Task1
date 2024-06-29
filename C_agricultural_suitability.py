@@ -3,11 +3,21 @@ from C1_predict import run_app as predict_using_all
 from C2_predict import app as predict_using_latlong
 
 def main_page():
+    col1, col2, col3, col4 = st.columns([1,1,3,1], gap='medium')
+    with col1:
+        st.page_link(r"A_home.py", label="Home", icon="🏠")
+    with col2:
+        st.page_link(r"B_eda.py", label="EDA", icon="📶")
+    with col3:
+        st.page_link(r"C_agricultural_suitability.py", label="Find Suitable Area for Uraban Farming", icon="🤖")
+    with col4:
+        st.page_link(r"D_contact.py", label="Contact Us", icon="📧")
+    
+    
     st.title("Agriculture Suitability Prediction")
     
     st.write("""
     ### Predict using all the parameters
-    
     """)
     
     if st.button("Predict using All the Values"):
