@@ -5,7 +5,7 @@ import streamlit as st
 from data_fetcher import DataFetcher
 
 # Load the trained model
-with open('models/XGBClassifier_Pipeline_Optuna_Vidhi.pkl', 'rb') as f:
+with open('XGBClassifier_Pipeline_Optuna_Vidhi.pkl', 'rb') as f:
     model = pickle.load(f)
 
 # Initialize DataFetcher
