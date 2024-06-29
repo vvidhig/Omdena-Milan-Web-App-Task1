@@ -2,8 +2,6 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import base64
 import home
-import dashboard_zone4
-import dashboard_zone9
 from agricultural_suitability import app as suitability
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
@@ -59,12 +57,8 @@ def load_page(page):
         home.app()
     elif page == "Agricultural suitability":
         suitability()
-    elif page == "EDA for Zone 4":
-        st.write("Loading EDA Dashboard for Zone 4")
-        dashboard_zone4.show_dashboard_zone4()
-    elif page == "EDA for Zone 9":
-        st.write("Loading EDA Dashboard for Zone 9")
-        dashboard_zone9.show_dashboard_zone9()
+    elif page == "EDA":
+        st.write("This page will contain the EDA")
     elif page == "About":
         st.write("Displaying About Page")
 
