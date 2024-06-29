@@ -2,7 +2,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import base64
 import home
-from agricultural_suitability import app as suitability
+from C_agricultural_suitability import app as suitability
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 

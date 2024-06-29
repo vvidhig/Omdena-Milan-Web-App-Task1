@@ -1,6 +1,6 @@
-# main.py
 import streamlit as st
-import base64
+from C1_predict import run_app as predict_using_all
+
 def main_page():
     st.title("Agriculture Suitability Prediction")
     
@@ -21,9 +21,9 @@ def main_page():
         st.session_state.page = "unsupervised"
         st.experimental_rerun()
 
-def supervised_page():
-    import suitability_supervised
-    suitability_supervised.app()
+def predict_using_all():
+    import  C1_predict
+    C1_predict.run_app()
 
 def unsupervised_page():
     import suitability_unsupervised
@@ -34,7 +34,7 @@ def app():
         st.session_state.page = "main"
 
     if st.session_state.page == "supervised":
-        supervised_page()
+        predict_using_all()
     elif st.session_state.page == "unsupervised":
         unsupervised_page()
     else:
