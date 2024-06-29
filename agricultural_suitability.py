@@ -29,7 +29,7 @@ def main_page():
     Our XGBClassifier model is trained to predict the suitability of an area for urban farming based on various features.
     """)
     
-    if st.button("Predict using Supervised Model"):
+    if st.button("Predict using All the Values"):
         st.session_state.page = "supervised"
         st.experimental_rerun()
     
@@ -40,7 +40,7 @@ def main_page():
     Our KMeans model groups areas into clusters to identify patterns in urban farming suitability.
     """)
     
-    if st.button("Predict using Unsupervised Model"):
+    if st.button("Predict using Latitude and Longitude"):
         st.session_state.page = "unsupervised"
         st.experimental_rerun()
 
