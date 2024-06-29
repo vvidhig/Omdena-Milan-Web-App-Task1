@@ -44,7 +44,13 @@ def run_app():
 
     col9, col10, col11, col12 = st.columns(4)
     with col9:
-        landuse = st.selectbox('Landuse', ['grass', 'Agriculture', 'Forest', 'Water', 'Barren'])
+        landuse = st.selectbox('Landuse', ['railway', 'residential', 'grass', 'farmland', 'military',
+       'meadow', 'recreation_ground', 'construction', 'industrial',
+       'commercial', 'retail', 'farmyard', 'village_green', 'brownfield',
+       'religious', 'flowerbed', 'allotments', 'forest', 'garages',
+       'depot', 'orchard', 'quarry', 'churchyard',
+       'greenhouse_horticulture', 'old_cementery', 'plant_nursery',
+       'cemetery', 'basin'])
     with col10:
         solar_radiation = st.number_input('Solar Radiation')
     with col11:
