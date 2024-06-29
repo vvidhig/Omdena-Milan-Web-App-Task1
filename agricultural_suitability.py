@@ -5,10 +5,8 @@ def main_page():
     st.title("Agriculture Suitability Prediction")
     
     st.write("""
-    ### XGBClassifier
-    XGBoost is a popular and efficient machine learning algorithm that implements gradient boosting. 
-    It is widely used for classification and regression tasks due to its high performance and speed. 
-    Our XGBClassifier model is trained to predict the suitability of an area for urban farming based on various features.
+    ### Predict using all the parameters
+    
     """)
     
     if st.button("Predict using All the Values"):
@@ -16,13 +14,10 @@ def main_page():
         st.experimental_rerun()
     
     st.write("""
-    ### KMeans Model
-    KMeans is an unsupervised learning algorithm used for clustering. 
-    It partitions the data into K clusters based on feature similarity. 
-    Our KMeans model groups areas into clusters to identify patterns in urban farming suitability.
+    ### Predict using only the Latitude and Longitude
     """)
     
-    if st.button("Predict using Latitude and Longitude"):
+    if st.button("Predict using only Latitude and Longitude"):
         st.session_state.page = "unsupervised"
         st.experimental_rerun()
 

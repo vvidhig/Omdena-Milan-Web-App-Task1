@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import base64
 from predict_supervised import predict as predict_supervised
 from data_fetcher import DataFetcher
 
