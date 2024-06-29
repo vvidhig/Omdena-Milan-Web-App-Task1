@@ -19,7 +19,7 @@ st.set_page_config(
 with st.sidebar:
     selected_page = option_menu(
         menu_title='Navigation',
-        options=['Home','EDA Dashboard', 'Agricultural suitability', 'Contacts'],
+        options=['Home','EDA Dashboard', 'Find Suitable Area of Urban Farming', 'Contacts'],
         icons=['house-fill', 'trophy-fill', 'chat-fill', 'chat-fill', 'info-circle-fill'],
         menu_icon='chat-text-fill',
         default_index=0,
@@ -35,7 +35,7 @@ with st.sidebar:
 def load_page(page):
     if page == "Home":
         A_home.app()
-    elif page == "Agricultural suitability":
+    elif page == "Find Suitable Area of Urban Farming":
         suitability()
     elif page == "EDA Dashboard":
         st.write("This page will contain the EDA")
