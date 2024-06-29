@@ -6,25 +6,6 @@ from agricultural_suitability import app as suitability
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-# Function to convert image to base64
-def get_base64_of_bin_file(bin_file):
-    with open(bin_file, 'rb') as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
-
-# Function to embed base64 image in CSS
-def set_background_image():
-    image_path = "Images/predict_bg.jpg"
-    encoded_image = get_base64_of_bin_file(image_path)
-    image_css = f"""
-        <style>
-        body {{
-            background-image: url('data:image/jpeg;base64,{encoded_image}');
-            background-size: cover;
-        }}
-        </style>
-    """
-    st.markdown(image_css, unsafe_allow_html=True)
 
 st.set_page_config(
     page_title="Agriculture Suitability Analysis",
@@ -32,8 +13,6 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="expanded"
 )
-
-set_background_image()
 
 # Sidebar navigation
 with st.sidebar:
