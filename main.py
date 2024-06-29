@@ -19,7 +19,7 @@ st.set_page_config(
 with st.sidebar:
     selected_page = option_menu(
         menu_title='Navigation',
-        options=['Home', 'Agricultural suitability', 'EDA for Zone 4', 'EDA for Zone 9', 'Contributors'],
+        options=['Home','EDA Dashboard', 'Agricultural suitability', 'Contacts'],
         icons=['house-fill', 'trophy-fill', 'chat-fill', 'chat-fill', 'info-circle-fill'],
         menu_icon='chat-text-fill',
         default_index=0,
@@ -37,9 +37,9 @@ def load_page(page):
         A_home.app()
     elif page == "Agricultural suitability":
         suitability()
-    elif page == "EDA":
+    elif page == "EDA Dashboard":
         st.write("This page will contain the EDA")
-    elif page == "About":
+    elif page == "Contacts":
         Contacts()
 
 if __name__ == "__main__":
