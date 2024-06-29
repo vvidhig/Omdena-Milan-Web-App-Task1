@@ -7,13 +7,56 @@ from D_contact import contact_page as Contacts
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-
 st.set_page_config(
     page_title="Agriculture Suitability Analysis",
     page_icon="🌾",
     layout="centered",
     initial_sidebar_state="expanded"
 )
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+def set_background_and_text_color(png_file):
+    bin_str = get_base64_of_bin_file(png_file)
+    page_bg_img = '''
+    <style>
+    [data-testid="stAppViewContainer"] > .main {
+        background-image: url("data:image/png;base64,%s");
+        background-size: 100vw 100vh;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    /* Set all text to black */
+    body, .stApp, p, h1, h2, h3, h4, h5, h6 {
+        color: black !important;
+    }
+    /* Style for input boxes, dropdowns, number inputs, and buttons */
+    .stTextInput > div > div > input, 
+    .stButton > button,
+    .stNumberInputContainer > div > div > div > button {
+        background-color: rgb(100,152,71) !important;
+        color: black !important;
+        border: 1px solid rgba(0,0,0,0.2);
+    }
+    /* Style for number input container */
+    .stNumberInputContainer > div > div {
+        background-color: rgb(100,152,71) !important;
+    }
+    /* Style for slider */
+    .stSlider > div > div > div > div {
+        background-color: rgb(100,152,71) !important;
+    }
+    .stSlider > div > div > div > div > div {
+        color: black !important;
+    }
+    </style>
+    ''' % bin_str
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+
+# Example usage with your background image
+set_background_and_text_color('Images/bg.png')
 
 # Sidebar navigation
 with st.sidebar:

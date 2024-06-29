@@ -5,6 +5,10 @@ from predict_unsupervised import predict_unsupervised
 from data_fetcher import DataFetcher
 
 def app():
+    if st.button("Go back"):
+        st.session_state.page = "main"
+        st.rerun()
+        
     st.title("Predict using Latitude and Longitude")
 
     st.write("""
@@ -28,10 +32,6 @@ def app():
             prediction = predict_supervised(latitude, longitude)
         else:
             prediction = predict_unsupervised(latitude, longitude)
-        
-    if st.button("Go back"):
-        st.session_state.page = "main"
-        st.rerun()
 
 if __name__ == "__main__":
     app()

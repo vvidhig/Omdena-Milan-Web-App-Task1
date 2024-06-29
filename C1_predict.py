@@ -19,6 +19,11 @@ def get_prediction(model, features):
 
 # Function to display the Streamlit app
 def run_app():
+    
+    if st.button("Go back"):
+        st.session_state.page = "main"
+        st.rerun()
+        
     st.title('Urban Farming Suitability Analysis')
 
     # Input fields arranged in rows of four
@@ -105,10 +110,6 @@ def run_app():
             suitability = 'Not Suitable' if prediction in [1, 2, 3] else 'Suitable'
 
         st.write(f'The land is {suitability} for urban farming.')
-        
-    if st.button("Go back"):
-        st.session_state.page = "main"
-        st.rerun()
 
 if __name__ == '__main__':
     run_app()
