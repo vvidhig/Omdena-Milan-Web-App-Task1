@@ -30,11 +30,11 @@ def set_background_and_text_color(png_file):
         background-repeat: no-repeat;
     }
     .stApp, p, h1, h2, h3, h4, h5, h6 {
-        color: #FCF9DA;
+        color: #404040;
     }
      
     .stButton > button {
-        background-color: #9D6839 !important;
+        background-color: #FFBD59 !important;
         color: #404040 !important;
         border: 1px solid rgba(0,0,0,0.2);
     }
@@ -52,16 +52,16 @@ def set_background_and_text_color(png_file):
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Example usage with your background image
-set_background_and_text_color('Images/bg.png')
+set_background_and_text_color('Images/bg_img1.png')
 
 
 # Sidebar navigation
 with st.sidebar:
     sidebar_selected1 = option_menu(
         menu_title='Navigation',
-        options=['🛖 Home','🚀 Check Suitable Areas', '📊 EDA Dashboard', '🔎 Contacts and Contributors'],
-        icons=['🛖', '🚀', '📊', '🔎'],
-        menu_icon='chat-text-fill',
+        options=['Home','Check Suitable Areas', 'EDA Dashboard', 'Contacts'],
+         icons=['house-fill', 'rocket-fill', 'bar-chart-fill', 'phone-fill'],
+        menu_icon='book-fill',
         default_index=0,
         styles={
             "container": {"padding": "5!important", "background-color": '#FFBD59'},
@@ -75,13 +75,13 @@ with st.sidebar:
 
 # Function to load the selected page
 def load_page(page):
-    if page == "🛖 Home":
+    if page == "Home":
         A_home.app()
-    elif page == "🚀 Check Suitable Areas":
+    elif page == "Check Suitable Areas":
         suitability()
-    elif page == "📊 EDA Dashboard":
+    elif page == "EDA Dashboard":
         st.write("This page will contain the EDA")
-    elif page == "🔎 Contacts and Contributors":
+    elif page == "Contacts":
         Contacts()
 
 if __name__ == "__main__":
