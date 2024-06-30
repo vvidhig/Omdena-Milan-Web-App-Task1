@@ -7,7 +7,7 @@ import pandas as pd
 with open('models/XGBClassifier_Pipeline_Optuna_Vidhi.pkl', 'rb') as f:
     supervised_model = pickle.load(f)
 
-with open('models\kmeans_model_pipeline_Sneha.pkl', 'rb') as f:
+with open('models/kmeans_model_pipeline.pkl', 'rb') as f:
     unsupervised_model = pickle.load(f)
 
 # Function to get prediction
@@ -104,12 +104,15 @@ def run_app():
                 'NDWI': [ndwi],
                 'SAVI': [savi],
                 'landuse': [landuse],
-                'solar_radiation': [solar_radiation]
+                'solar_radiation': [solar_radiation],
+                'longitude': [longitude],
+                'latitude': [latitude],
+                'Zone': ["zone4"]
             })
             prediction = model.predict(features)[0]
-            suitability = 'Not Suitable' if prediction in [1, 2, 3] else 'Suitable'
+            suitability = 'Not Suitable' if prediction in [0,2] else 'Suitable'
 
-        st.write(f'The land is {suitability} for urban farming.')
+        st.write(f'The land is {suitability} for Urban Farming.')
 
 if __name__ == '__main__':
     run_app()

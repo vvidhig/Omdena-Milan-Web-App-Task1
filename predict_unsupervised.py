@@ -20,8 +20,8 @@ def predict_unsupervised(latitude, longitude):
     else:
         # Prepare the input data for the model as a Pandas DataFrame
         input_data = pd.DataFrame({
-            'Latitude': [latitude],
-            'Longitude': [longitude],
+            'latitude': [latitude],
+            'longitude': [longitude],
             'Zone': [additional_data['Zone']],
             'NDVI': [additional_data['NDVI']],
             'landuse': [additional_data['landuse']],
@@ -58,6 +58,6 @@ def predict_unsupervised(latitude, longitude):
         prediction = model.predict(input_data)
 
         if prediction[0] == 1:
-            st.error("The area is Not Suitable for Urban Farming")
-        else:
             st.success("The area is Suitable for Urban Farming")
+        else:
+            st.error("The area is Not Suitable for Urban Farming")
