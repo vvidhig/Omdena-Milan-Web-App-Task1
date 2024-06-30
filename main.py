@@ -52,70 +52,35 @@ def set_background_and_text_color(png_file):
 # Example usage with your background image
 set_background_and_text_color('Images/bg.png')
 
-# Horizontal navbar
-selected_page = option_menu(
-    menu_title=None,
-    options=[' 🛖 Home', ' 📊 EDA Dashboard', ' 🚀 Check Suitable Areas', ' 🔎 Contacts and Contributors'],
-    icons=['🛖', '📊', '🚀', '🔎'],
-    menu_icon='cast',
-    default_index=0,
-    orientation='horizontal',
-    styles={
-        "container": {
-            "padding": "0!important", 
-            "background-color": "#A5D97E",
-            "width": "100%",  # Makes the navbar full width
-            "margin": "0 auto",  # Centers the navbar
-            "text-align": "center",
-            "display": "flex",
-            "align-items": "center",
-            "justify-content": "center",
-        },
-        "icon": {"color": "black", "font-size": "17px"},
-        "nav-link": {
-            "font-size": "17px",
-            "text-align": "center",
-            "margin": "0px",
-            "padding": "7px 7px",  # Increased padding for larger buttons
-            "--hover-color": "#71A75E",
-            "color": "black",
-            "display": "flex",
-            "align-items": "center",
-            "justify-content": "center",
-        },
-        "nav-link-selected": {"background-color": "rgb(100,152,71)"},
-    }
-)
+
 # Sidebar navigation
-# with st.sidebar:
-#     sidebar_selected1 = option_menu(
-#         menu_title='Navigation',
-#         options=['Home','EDA Dashboard', 'Find Suitable Area of Urban Farming', 'Contacts'],
-#         icons=['house-fill', 'trophy-fill', 'chat-fill', 'info-circle-fill'],
-#         menu_icon='chat-text-fill',
-#         default_index=0,
-#         styles={
-#             "container": {"padding": "5!important", "background-color": '#A5D97E'},
-#             "icon": {"color": "black", "font-size": "20px"},
-#             "nav-link": {"color":"black", "font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#71A75E"},
-#             "nav-link-selected": {"background-color": "#71A75E"},
-#             "menu-title": {"color": "black"},
-#             "menu-icon": {"color": "black"}
-#         }
-#     )
+with st.sidebar:
+    sidebar_selected1 = option_menu(
+        menu_title='Navigation',
+        options=['🛖 Home','🚀 Check Suitable Areas', '📊 EDA Dashboard', '🔎 Contacts and Contributors'],
+        icons=['🛖', '🚀', '📊', '🔎'],
+        menu_icon='chat-text-fill',
+        default_index=0,
+        styles={
+            "container": {"padding": "5!important", "background-color": '#A5D97E'},
+            "icon": {"color": "black", "font-size": "20px"},
+            "nav-link": {"color":"black", "font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#71A75E"},
+            "nav-link-selected": {"background-color": "#71A75E"},
+            "menu-title": {"color": "black"},
+            "menu-icon": {"color": "black"}
+        }
+    )
 
 # Function to load the selected page
 def load_page(page):
-    if page == " 🛖 Home":
+    if page == "🛖 Home":
         A_home.app()
-    elif page == " 🚀 Check Suitable Areas":
+    elif page == "🚀 Check Suitable Areas":
         suitability()
-    elif page == " 📊 EDA Dashboard":
+    elif page == "📊 EDA Dashboard":
         st.write("This page will contain the EDA")
-    elif page == " 🔎 Contacts and Contributors":
+    elif page == "🔎 Contacts and Contributors":
         Contacts()
 
 if __name__ == "__main__":
-    page_to_load = selected_page
-    load_page(page_to_load)
-    # load_page(sidebar_selected1)
+    load_page(sidebar_selected1)
