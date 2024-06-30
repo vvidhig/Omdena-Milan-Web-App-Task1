@@ -1,6 +1,6 @@
 import streamlit as st
-from pages.C1_predict import run_app as predict_using_all
-from pages.C2_predict import app as predict_using_latlong
+from C1_predict import run_app as predict_using_all
+from C2_predict import app as predict_using_latlong
 
 def main_page():
     st.title("Agriculture Suitability Prediction")
@@ -22,11 +22,11 @@ def main_page():
         st.experimental_rerun()
 
 def predict_using_all():
-    import  pages.C1_predict as C1_predict
+    import  C1_predict as C1_predict
     C1_predict.run_app()
 
 def predict_using_latlong():
-    import pages.C2_predict as C2_predict
+    import C2_predict as C2_predict
     C2_predict.app()
 
 def app():

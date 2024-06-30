@@ -15,8 +15,8 @@ def app():
     Enter the latitude and longitude to predict whether the area is suitable for agriculture.
     """)
     
-    latitude = st.number_input("Latitude", format="%.6f", key = "<sort1>")
-    longitude = st.number_input("Longitude", format="%.6f", key = "<sort2>")
+    latitude = st.number_input("Latitude", format="%.8f", key = "<sort1>")
+    longitude = st.number_input("Longitude", format="%.8f", key = "<sort2>")
     
     st.write("Entered Latitude:", latitude)
     st.write("Entered Longitude:", longitude)

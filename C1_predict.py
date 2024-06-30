@@ -29,9 +29,9 @@ def run_app():
     # Input fields arranged in rows of four
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        smi = st.number_input('SMI')
+        latitude = st.number_input('Latitude')
     with col2:
-        ndbi = st.number_input('NDBI')
+        longitude = st.number_input('Longitude')
     with col3:
         roughness = st.number_input('Roughness')
     with col4:
@@ -59,19 +59,19 @@ def run_app():
     with col10:
         solar_radiation = st.number_input('Solar Radiation')
     with col11:
-        longitude = st.number_input('Longitude')
+        ndbi = st.number_input('NDBI')
     with col12:
-        latitude = st.number_input('Latitude')
+        smi = st.number_input('SMI')
+        
+    map_data = pd.DataFrame({'lat': [latitude], 'lon': [longitude]})
+    st.write("Location on Map:")
+    st.map(map_data)
 
     # Model selection
     model_type = st.selectbox('Select Model', ['Supervised Model : XGBClassifier', 'Unsupervised Model : KmeansClassifier'])
 
     # Model mapping
     model = supervised_model if model_type == 'Supervised Model : XGBClassifier' else unsupervised_model
-    
-    map_data = pd.DataFrame({'lat': [latitude], 'lon': [longitude]})
-    st.write("Location on Map:")
-    st.map(map_data)
 
     # Predict button
     if st.button('Predict'):
