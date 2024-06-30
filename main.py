@@ -66,6 +66,7 @@ selected_page = option_menu(
             "background-color": "#A5D97E",
             "width": "100%",  # Makes the navbar full width
             "margin": "0 auto",  # Centers the navbar
+            "text-align": "center",
             "display": "flex",
             "align-items": "center",
             "justify-content": "center",
