@@ -2,6 +2,8 @@ import streamlit as st
 import pickle
 import numpy as np
 import pandas as pd
+import folium
+from streamlit_folium import folium_static
 
 # Load the models (adjust paths as necessary)
 with open('models/XGBClassifier_Pipeline_Optuna_Vidhi.pkl', 'rb') as f:
@@ -41,7 +43,7 @@ def run_app():
     with col5:
         ndvi = st.number_input('NDVI')
     with col6:
-        lst = st.number_input('LST')
+        smi = st.number_input('SMI')
     with col7:
         ndwi = st.number_input('NDWI')
     with col8:
@@ -60,12 +62,21 @@ def run_app():
         solar_radiation = st.number_input('Solar Radiation')
     with col11:
         ndbi = st.number_input('NDBI')
-    with col12:
-        smi = st.number_input('SMI')
         
     st.write("Location on Map:")
-    map_data = pd.DataFrame({'lat': [latitude], 'lon': [longitude]}, columns=['lat', 'lon'])
-    st.map(map_data)
+    
+    map_data = pd.DataFrame({'lat': [latitude], 'lon': [longitude]})
+    # st.write("Location on Map:")
+    # st.map(map_data)
+    
+    def create_map(latitude, longitude, zoom=10):
+        m = folium.Map(location=[latitude, longitude], zoom_start=zoom)
+        folium.Marker([latitude, longitude]).add_to(m)
+        return m
+
+    # Use your latitude and longitude values
+    map = create_map(latitude, longitude)
+    folium_static(map)
 
     # Model selection
     model_type = st.selectbox('Select Model', ['Supervised Model : XGBClassifier', 'Unsupervised Model : KmeansClassifier'])
@@ -83,7 +94,7 @@ def run_app():
                 'Zone': ["zone4"],
                 'Slope': [slope],
                 'NDVI': [ndvi],
-                'LST': [lst],
+                'LST': [121.681648448277],
                 'NDWI': [ndwi],
                 'SAVI': [savi],
                 'landuse': [landuse],

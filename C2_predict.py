@@ -3,6 +3,8 @@ import pandas as pd
 from predict_supervised import predict as predict_supervised
 from predict_unsupervised import predict_unsupervised
 from data_fetcher import DataFetcher
+import folium
+from streamlit_folium import folium_static
 
 def app():
     if st.button("Go back"):
@@ -15,15 +17,24 @@ def app():
     Enter the latitude and longitude to predict whether the area is suitable for agriculture.
     """)
     
-    latitude = st.number_input("Latitude", format="%.8f", key = "<sort1>")
-    longitude = st.number_input("Longitude", format="%.8f", key = "<sort2>")
+    latitude = st.number_input("Latitude", format="%.15f", key = "<sort1>")
+    longitude = st.number_input("Longitude", format="%.15f", key = "<sort2>")
     
     st.write("Entered Latitude:", latitude)
     st.write("Entered Longitude:", longitude)
     
     map_data = pd.DataFrame({'lat': [latitude], 'lon': [longitude]})
-    st.write("Location on Map:")
-    st.map(map_data)
+    # st.write("Location on Map:")
+    # st.map(map_data)
+    
+    def create_map(latitude, longitude, zoom=10):
+        m = folium.Map(location=[latitude, longitude], zoom_start=zoom)
+        folium.Marker([latitude, longitude]).add_to(m)
+        return m
+
+    # Use your latitude and longitude values
+    map = create_map(latitude, longitude)
+    folium_static(map)
     
     model_type = st.selectbox('Select Model', ['Supervised Model : XGBClassifier', 'Unsupervised Model : KmeansClassifier'])
 
