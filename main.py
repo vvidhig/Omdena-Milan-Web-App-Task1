@@ -55,8 +55,8 @@ set_background_and_text_color('Images/bg.png')
 # Horizontal navbar
 selected_page = option_menu(
     menu_title=None,
-    options=['Home', 'EDA Dashboard', 'Check Suitable Areas', 'Contacts and Contributors'],
-    icons=['house-fill', 'trophy-fill', 'chat-fill', 'info-circle-fill'],
+    options=[' 🛖 Home', ' 📊 EDA Dashboard', ' 🚀 Check Suitable Areas', ' 🔎 Contacts and Contributors'],
+    icons=['🛖', '📊', '🚀', '🔎'],
     menu_icon='cast',
     default_index=0,
     orientation='horizontal',
@@ -71,7 +71,7 @@ selected_page = option_menu(
             "align-items": "center",
             "justify-content": "center",
         },
-        "icon": {"color": "black", "font-size": "17px"},  # Increased icon size
+        "icon": {"color": "black", "font-size": "17px"},
         "nav-link": {
             "font-size": "17px",
             "text-align": "center",
@@ -106,13 +106,13 @@ selected_page = option_menu(
 
 # Function to load the selected page
 def load_page(page):
-    if page == "Home":
+    if page == " 🛖 Home":
         A_home.app()
-    elif page == "Check Suitable Areas" or page == "Find Suitable Area of Urban Farming":
+    elif page == " 🚀 Check Suitable Areas":
         suitability()
-    elif page == "EDA Dashboard":
+    elif page == " 📊 EDA Dashboard":
         st.write("This page will contain the EDA")
-    elif page == "Contacts and Contributors":
+    elif page == " 🔎 Contacts and Contributors":
         Contacts()
 
 if __name__ == "__main__":

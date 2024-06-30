@@ -5,7 +5,7 @@ import streamlit as st
 from data_fetcher import DataFetcher
 
 # Load the trained model
-with open('models/kmeans_model_pipeline_Sneha.pkl', 'rb') as f:
+with open('models/kmeans_model_pipeline.pkl', 'rb') as f:
     model = pickle.load(f)
 
 # Initialize DataFetcher
@@ -20,6 +20,9 @@ def predict_unsupervised(latitude, longitude):
     else:
         # Prepare the input data for the model as a Pandas DataFrame
         input_data = pd.DataFrame({
+            'Latitude': [latitude],
+            'Longitude': [longitude],
+            'Zone': [additional_data['Zone']],
             'NDVI': [additional_data['NDVI']],
             'landuse': [additional_data['landuse']],
             'LST': [additional_data['LST']],
@@ -54,7 +57,7 @@ def predict_unsupervised(latitude, longitude):
         # Make the prediction
         prediction = model.predict(input_data)
 
-        if prediction[0] == 0:
-            st.success("The area is Suitable for Urban Farming")
-        else:
+        if prediction[0] == 1:
             st.error("The area is Not Suitable for Urban Farming")
+        else:
+            st.success("The area is Suitable for Urban Farming")
