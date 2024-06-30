@@ -29,22 +29,24 @@ def set_background_and_text_color(png_file):
         background-position: center;
         background-repeat: no-repeat;
     }
-    body, .stApp, p, h1, h2, h3, h4, h5, h6 {
-        color: black !important;
+    .stApp, p, h1, h2, h3, h4, h5, h6 {
+        color: #FCF9DA;
     }
-    .stTextInput > div > div > input, 
-    .stButton > button,
-    .stNumberInputContainer > div > div > div > button {
-        background-color: rgb(100,152,71) !important;
-        color: black !important;
+     
+    .stButton > button {
+        background-color: #9D6839 !important;
+        color: #404040 !important;
         border: 1px solid rgba(0,0,0,0.2);
     }
+    
     .stSlider > div > div > div > div {
         background-color: rgb(100,152,71) !important;
     }
+    
     .stSlider > div > div > div > div > div {
         color: black !important;
     }
+    
     </style>
     ''' % bin_str
     st.markdown(page_bg_img, unsafe_allow_html=True)
@@ -62,12 +64,12 @@ with st.sidebar:
         menu_icon='chat-text-fill',
         default_index=0,
         styles={
-            "container": {"padding": "5!important", "background-color": '#A5D97E'},
-            "icon": {"color": "black", "font-size": "20px"},
-            "nav-link": {"color":"black", "font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#71A75E"},
+            "container": {"padding": "5!important", "background-color": '#FFBD59'},
+            "icon": {"color": "#404040", "font-size": "20px"},
+            "nav-link": {"color":"#404040", "font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#71A75E"},
             "nav-link-selected": {"background-color": "#71A75E"},
-            "menu-title": {"color": "black"},
-            "menu-icon": {"color": "black"}
+            "menu-title": {"color": "#404040"},
+            "menu-icon": {"color": "#404040"}
         }
     )
 
