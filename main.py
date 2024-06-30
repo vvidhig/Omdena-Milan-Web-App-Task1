@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import base64
-import A_home
+import pages.A_home as A_home
 from C_agricultural_suitability import app as suitability
 from D_contact import contact_page as Contacts
 import warnings
