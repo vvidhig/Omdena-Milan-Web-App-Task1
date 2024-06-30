@@ -13,6 +13,7 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="expanded"
 )
+
 def get_base64_of_bin_file(bin_file):
     with open(bin_file, 'rb') as f:
         data = f.read()
@@ -51,10 +52,31 @@ def set_background_and_text_color(png_file):
 # Example usage with your background image
 set_background_and_text_color('Images/bg.png')
 
+# Horizontal navbar
+selected_page = option_menu(
+    menu_title=None,
+    options=['Home', 'EDA Dashboard', 'Find Suitable Area', 'Contacts'],
+    icons=['house-fill', 'trophy-fill', 'chat-fill', 'info-circle-fill'],
+    menu_icon='cast',
+    default_index=0,
+    orientation='horizontal',
+    styles={
+        "container": {"padding": "0!important", "background-color": "#A5D97E"},
+        "icon": {"color": "black", "font-size": "14px"},
+        "nav-link": {
+            "font-size": "14px",
+            "text-align": "center",
+            "margin": "0px",
+            "--hover-color": "#71A75E",
+            "color": "black",
+        },
+        "nav-link-selected": {"background-color": "#71A75E"},
+    }
+)
 
 # Sidebar navigation
 with st.sidebar:
-    selected_page = option_menu(
+    sidebar_selected1 = option_menu(
         menu_title='Navigation',
         options=['Home','EDA Dashboard', 'Find Suitable Area of Urban Farming', 'Contacts'],
         icons=['house-fill', 'trophy-fill', 'chat-fill', 'info-circle-fill'],
@@ -74,7 +96,7 @@ with st.sidebar:
 def load_page(page):
     if page == "Home":
         A_home.app()
-    elif page == "Find Suitable Area of Urban Farming":
+    elif page == "Find Suitable Area" or page == "Find Suitable Area of Urban Farming":
         suitability()
     elif page == "EDA Dashboard":
         st.write("This page will contain the EDA")
@@ -82,4 +104,6 @@ def load_page(page):
         Contacts()
 
 if __name__ == "__main__":
-    load_page(selected_page)
+    page_to_load = selected_page
+    load_page(page_to_load)
+    load_page(sidebar_selected1)
