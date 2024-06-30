@@ -63,8 +63,8 @@ def run_app():
     with col12:
         smi = st.number_input('SMI')
         
-    map_data = pd.DataFrame({'lat': [latitude], 'lon': [longitude]})
     st.write("Location on Map:")
+    map_data = pd.DataFrame({'lat': [latitude], 'lon': [longitude]}, columns=['lat', 'lon'])
     st.map(map_data)
 
     # Model selection
