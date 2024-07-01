@@ -55,15 +55,15 @@ def predict(latitude, longitude):
 
         features = [
             ('Zone', f"{additional_data['Zone']}"),
-            ('NDVI', f"{additional_data['NDVI']:.6f}"),
+            ('NDVI (Normalized Difference Vegetation Index)', f"{additional_data['NDVI']:.6f}"),
             ('Land Use', f"{additional_data['landuse']}"),
-            ('LST', f"{additional_data['LST']:.6f}"),
-            ('NDBI', f"{additional_data['NDBI']:.6f}"),
-            ('NDWI', f"{additional_data['NDWI']:.6f}"),
+            ('Surface Temperature (LST)', f"{additional_data['LST']:.6f}"),
+            ('NDBI (Normalized Difference Built-up Index)', f"{additional_data['NDBI']:.6f}"),
+            ('NDWI (Normalized Difference Water Index)', f"{additional_data['NDWI']:.6f}"),
             ('Roughness', f"{additional_data['Roughness']:.6f}"),
-            ('SAVI', f"{additional_data['SAVI']:.6f}"),
-            ('Slope', f"{additional_data['Slope']:.6f}"),
-            ('SMI', f"{additional_data['SMI']:.6f}"),
+            ('SAVI (Soil-Adjusted Vegetation Index)', f"{additional_data['SAVI']:.6f}"),
+            ('Land Slope', f"{additional_data['Slope']:.6f}"),
+            ('SMI (Soil Moisture)', f"{additional_data['SMI']:.6f}"),
             ('Solar Radiation', f"{additional_data['solar_radiation']:.6f}")
         ]
 
