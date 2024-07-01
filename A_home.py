@@ -86,7 +86,7 @@ def app():
     st.markdown("""
     <div class="custom-text">
     <h3>Project Overview</h3>
-        <p>Urban farming plays a crucial role in the fight against climate change by supporting sustainable food production within cities. As urbanization continues to expand, integrating agriculture into urban areas not only strengthens local food security but also reduces transportation emissions and the carbon footprint associated with conventional farming practices.</p>
+        <p>This project was created under Omdena, Milan, Italy Chapter, with the goal of utilizing advanced machine learning techniques to predict suitable areas for urban farming. The project's objectives align with the broader mission of promoting sustainability and combating climate change through innovative urban agricultural practices.</p>
     </div>
     """, unsafe_allow_html=True)
     
