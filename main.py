@@ -33,6 +33,9 @@ def set_background_and_text_color(png_file):
     .stApp, p, h1, h2, h3, h4, h5, h6 {
         color: #404040;
     }
+    [data-testid="stSidebar"] {
+        background-color: #254117;
+    }
     .stApp > header {
         background-color: transparent; /* Make header background transparent */
         box-shadow: none; /* Remove box-shadow */
@@ -68,11 +71,11 @@ with st.sidebar:
         default_index=0,
         styles={
             "container": {"padding": "5!important", "background-color": '#FFBD59'},
-            "icon": {"color": "#404040", "font-size": "20px"},
-            "nav-link": {"color":"#404040", "font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#71A75E"},
+            "icon": {"color": "#001f54", "font-size": "20px"},
+            "nav-link": {"color":"#001f54", "font-size": "20px", "text-align": "left", "margin":"0px", "--hover-color": "#71A75E"},
             "nav-link-selected": {"background-color": "#71A75E"},
-            "menu-title": {"color": "#404040"},
-            "menu-icon": {"color": "#404040"}
+            "menu-title": {"color": "#540b0e"},
+            "menu-icon": {"color": "#540b0e"}
         }
     )
 
