@@ -33,6 +33,10 @@ def app():
     st.write("""
     Enter the latitude and longitude to predict whether the area is suitable for agriculture.
     """)
+    st.write("""
+    Note : This feature is only available for Zone 4 and Zone 9 of Milan, Italy.
+    """)
+    
     
     latitude = st.number_input("Latitude", format="%.15f", key="<sort1>")
     longitude = st.number_input("Longitude", format="%.15f", key="<sort2>")

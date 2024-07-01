@@ -14,7 +14,7 @@ def apply_custom_css():
             color: #665D1E; /* Change to the desired color */
         }
         .custom-text {
-            font-family: "Teko", sans-serif;
+            # font-family: "Teko", sans-serif;
             font-size: 1.8em;
             font-weight: 400;
             color: #622F22; /* Change to the desired color */
@@ -31,6 +31,7 @@ def show_main_page():
     st.markdown("""
     <div class="custom-text">
     <h3>Predict using all the parameters</h3>
+    <p>This feature can be used to predict the agricultural suitability of any location. By utilizing a comprehensive set of input data, including social, climatic, and infrastructural factors, the models provide accurate predictions to support urban farming initiatives in diverse regions. This capability allows for the assessment and optimization of urban agriculture globally, contributing to sustainable development and food security.</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -41,6 +42,7 @@ def show_main_page():
     st.markdown("""
     <div class="custom-text">
     <h3>Predict using only the Latitude and Longitude</h3>
+    <p>Currently, this feature is limited to Zone 4 and Zone 9 of Milan, Italy, providing focused analysis and predictions tailored to these specific geographical areas.</p>
     </div>
     """, unsafe_allow_html=True)
     
