@@ -35,6 +35,22 @@ def predict_unsupervised(latitude, longitude):
             'solar_radiation': [additional_data['solar_radiation']]
         })
 
+        # Write the additional features with custom styling
+        st.markdown(
+            """
+            <style>
+            @import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&family=Teko:wght@300..700&display=swap');
+            .custom-text {
+                font-family: 'Teko', sans-serif;
+                font-size: 1.5em;
+                color: #556B2F; /* Olive green color */
+                font-weight: 500;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
         st.write("### Additional Features:")
         features = [
             ('Zone', f"{additional_data['Zone']}"),
@@ -52,8 +68,7 @@ def predict_unsupervised(latitude, longitude):
 
         cols = st.columns(3)
         for i, (name, value) in enumerate(features):
-            cols[i % 3].write(f"**{name}:** {value}")
-
+            cols[i % 3].write(f"<span class='custom-text'>{name}: {value}</span>", unsafe_allow_html=True)
         # Make the prediction
         prediction = model.predict(input_data)
 

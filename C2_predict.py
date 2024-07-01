@@ -7,25 +7,40 @@ import folium
 from streamlit_folium import folium_static
 
 def app():
+    # Custom CSS for title
+    st.markdown(
+        """
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playwrite+US+Modern:wght@100..400&display=swap');
+        .custom-title {
+            font-family: 'Playwrite US Modern', sans-serif;
+            font-size: 2em;
+            color: #556B2F; /* Olive green color */
+            font-weight:400;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     if st.button("Go back"):
         st.session_state.page = "main"
         st.rerun()
         
-    st.title("Predict using Latitude and Longitude")
+    # Title with custom font and color
+    st.markdown('<p class="custom-title">Predict using Latitude and Longitude</p>', unsafe_allow_html=True)
 
     st.write("""
     Enter the latitude and longitude to predict whether the area is suitable for agriculture.
     """)
     
-    latitude = st.number_input("Latitude", format="%.15f", key = "<sort1>")
-    longitude = st.number_input("Longitude", format="%.15f", key = "<sort2>")
+    latitude = st.number_input("Latitude", format="%.15f", key="<sort1>")
+    longitude = st.number_input("Longitude", format="%.15f", key="<sort2>")
     
     st.write("Entered Latitude:", latitude)
     st.write("Entered Longitude:", longitude)
     
     map_data = pd.DataFrame({'lat': [latitude], 'lon': [longitude]})
-    # st.write("Location on Map:")
-    # st.map(map_data)
     
     def create_map(latitude, longitude, zoom=10):
         m = folium.Map(location=[latitude, longitude], zoom_start=zoom)

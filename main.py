@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import base64
 import A_home as A_home
+from B_eda import eda_page as eda
 from C_agricultural_suitability import app as suitability
 from D_contact import contact_page as Contacts
 import warnings
@@ -32,21 +33,21 @@ def set_background_and_text_color(png_file):
     .stApp, p, h1, h2, h3, h4, h5, h6 {
         color: #404040;
     }
-     
+    .stApp > header {
+        background-color: transparent; /* Make header background transparent */
+        box-shadow: none; /* Remove box-shadow */
+    }
     .stButton > button {
         background-color: #FFBD59 !important;
         color: #404040 !important;
         border: 1px solid rgba(0,0,0,0.2);
     }
-    
     .stSlider > div > div > div > div {
         background-color: rgb(100,152,71) !important;
     }
-    
     .stSlider > div > div > div > div > div {
         color: black !important;
     }
-    
     </style>
     ''' % bin_str
     st.markdown(page_bg_img, unsafe_allow_html=True)
@@ -54,13 +55,15 @@ def set_background_and_text_color(png_file):
 # Example usage with your background image
 set_background_and_text_color('Images/bg_img1.png')
 
+# Load the logo
+st.image('Images/omdenalogo.png', width=130)  # Adjust width as per your logo size
 
 # Sidebar navigation
 with st.sidebar:
     sidebar_selected1 = option_menu(
         menu_title='Navigation',
         options=['Home','Check Suitable Areas', 'EDA Dashboard', 'Contacts'],
-         icons=['house-fill', 'rocket-fill', 'bar-chart-fill', 'phone-fill'],
+        icons=['house-fill', 'rocket-fill', 'bar-chart-fill', 'phone-fill'],
         menu_icon='book-fill',
         default_index=0,
         styles={
@@ -80,7 +83,8 @@ def load_page(page):
     elif page == "Check Suitable Areas":
         suitability()
     elif page == "EDA Dashboard":
-        st.write("This page will contain the EDA")
+        # st.write("This page will contain the EDA")
+        eda()
     elif page == "Contacts":
         Contacts()
 

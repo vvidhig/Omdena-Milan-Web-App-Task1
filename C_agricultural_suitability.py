@@ -2,24 +2,66 @@ import streamlit as st
 from C1_predict import run_app as predict_using_all
 from C2_predict import app as predict_using_latlong
 
-def main_page():
-    st.title("Agriculture Suitability Prediction")
+def apply_custom_css():
+    st.markdown(
+        """
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap');
+        .custom-title {
+            font-family: 'Playwrite DE Grund', sans-serif;
+            font-size: 2.2em;
+            color: #665D1E; /* Change to the desired color */
+        }
+        .custom-text {
+            font-family: "Teko", sans-serif;
+            font-size: 1.8em;
+            font-weight: 400;
+            color: #622F22; /* Change to the desired color */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+def show_main_page():
+    apply_custom_css()
+    st.markdown('<p class="custom-title">Agriculture Suitability Prediction</p>', unsafe_allow_html=True)
     
-    st.write("""
-    ### Predict using all the parameters
-    """)
+    st.markdown("""
+    <div class="custom-text">
+    <h3>Predict using all the parameters</h3>
+    </div>
+    """, unsafe_allow_html=True)
     
     if st.button("Predict using All the Values"):
         st.session_state.page = "supervised"
         st.experimental_rerun()
     
-    st.write("""
-    ### Predict using only the Latitude and Longitude
-    """)
+    st.markdown("""
+    <div class="custom-text">
+    <h3>Predict using only the Latitude and Longitude</h3>
+    </div>
+    """, unsafe_allow_html=True)
     
     if st.button("Predict using only Latitude and Longitude"):
         st.session_state.page = "unsupervised"
         st.experimental_rerun()
+
+def app():
+    apply_custom_css()
+    if 'page' not in st.session_state:
+        st.session_state.page = "main"
+
+    if st.session_state.page == "supervised":
+        predict_using_all()
+    elif st.session_state.page == "unsupervised":
+        predict_using_latlong()
+    else:
+        show_main_page()
+
+if __name__ == "__main__":
+    app()
 
 def predict_using_all():
     import  C1_predict as C1_predict
@@ -30,6 +72,7 @@ def predict_using_latlong():
     C2_predict.app()
 
 def app():
+    apply_custom_css()
     if 'page' not in st.session_state:
         st.session_state.page = "main"
 
@@ -38,7 +81,7 @@ def app():
     elif st.session_state.page == "unsupervised":
         predict_using_latlong()
     else:
-        main_page()
+        show_main_page()
 
 if __name__ == "__main__":
     app()

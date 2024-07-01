@@ -21,13 +21,30 @@ def get_prediction(model, features):
 
 # Function to display the Streamlit app
 def run_app():
-    
+    # Custom CSS for title
+    st.markdown(
+        """
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playwrite+US+Modern:wght@100..400&display=swap');
+        .custom-title {
+            font-family: 'Playwrite US Modern', sans-serif;
+            font-size: 2em;
+            color: #556B2F; /* Olive green color */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     if st.button("Go back"):
         st.session_state.page = "main"
         st.rerun()
-        
-    st.title('Urban Farming Suitability Analysis')
+    
 
+    # Title with custom font and color
+    st.markdown('<p class="custom-title">Urban Farming Suitability Analysis</p>', unsafe_allow_html=True)
+
+    
     # Input fields arranged in rows of four
     col1, col2, col3, col4 = st.columns(4)
     with col1:
@@ -49,32 +66,29 @@ def run_app():
     with col8:
         savi = st.number_input('SAVI')
 
-    col9, col10, col11, col12 = st.columns(4)
+    col9, col10, col11 = st.columns(3)
     with col9:
         landuse = st.selectbox('Landuse', ['railway', 'residential', 'grass', 'farmland', 'military',
-       'meadow', 'recreation_ground', 'construction', 'industrial',
-       'commercial', 'retail', 'farmyard', 'village_green', 'brownfield',
-       'religious', 'flowerbed', 'allotments', 'forest', 'garages',
-       'depot', 'orchard', 'quarry', 'churchyard',
-       'greenhouse_horticulture', 'old_cementery', 'plant_nursery',
-       'cemetery', 'basin'])
+                                           'meadow', 'recreation_ground', 'construction', 'industrial',
+                                           'commercial', 'retail', 'farmyard', 'village_green', 'brownfield',
+                                           'religious', 'flowerbed', 'allotments', 'forest', 'garages',
+                                           'depot', 'orchard', 'quarry', 'churchyard',
+                                           'greenhouse_horticulture', 'old_cementery', 'plant_nursery',
+                                           'cemetery', 'basin'])
     with col10:
         solar_radiation = st.number_input('Solar Radiation')
     with col11:
         ndbi = st.number_input('NDBI')
-        
+    
     st.write("Location on Map:")
     
     map_data = pd.DataFrame({'lat': [latitude], 'lon': [longitude]})
-    # st.write("Location on Map:")
-    # st.map(map_data)
     
     def create_map(latitude, longitude, zoom=10):
         m = folium.Map(location=[latitude, longitude], zoom_start=zoom)
         folium.Marker([latitude, longitude]).add_to(m)
         return m
 
-    # Use your latitude and longitude values
     map = create_map(latitude, longitude)
     folium_static(map)
 
@@ -111,7 +125,7 @@ def run_app():
                 'Roughness': [roughness],
                 'Slope': [slope],
                 'NDVI': [ndvi],
-                'LST': [lst],
+                'LST': [121.681648448277],
                 'NDWI': [ndwi],
                 'SAVI': [savi],
                 'landuse': [landuse],
@@ -121,9 +135,10 @@ def run_app():
                 'Zone': ["zone4"]
             })
             prediction = model.predict(features)[0]
-            suitability = 'Not Suitable' if prediction in [0,2] else 'Suitable'
+            suitability = 'Not Suitable' if prediction in [0, 2] else 'Suitable'
 
         st.write(f'The land is {suitability} for Urban Farming.')
 
 if __name__ == '__main__':
     run_app()
+
