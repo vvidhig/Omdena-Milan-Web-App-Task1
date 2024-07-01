@@ -75,6 +75,7 @@ def app():
     </div>
     """, unsafe_allow_html=True)
     
+    
     st.markdown("""
     <div class="custom-text">
     <h3>Introduction</h3>
@@ -90,6 +91,12 @@ def app():
     </div>
     """, unsafe_allow_html=True)
     
+    st.markdown("""
+    <div class="custom-text">
+    <h3>Models Used</h3>
+        <p>Two machine learning models have been employed in this project: XGBoostClassifier and KMeansClassifier. The XGBoostClassifier is used for supervised learning, leveraging a wide range of input features to make accurate predictions about the suitability of different areas for urban farming. The KMeansClassifier, on the other hand, is used for unsupervised learning, clustering locations based on their characteristics to identify suitable areas without requiring labeled training data.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("""
     <div class="custom-text">
