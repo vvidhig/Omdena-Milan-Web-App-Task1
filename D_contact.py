@@ -4,6 +4,16 @@ import pandas as pd
 # Read the CSV file
 #dataset_df = pd.read_csv("dataset/Datasets_references.csv")
 
+def display_local_chapter_leads():
+    st.write("""
+    ## Local Chapter Leads
+    """)
+    st.markdown("""
+    - **Maria Fisher**
+    - **Bernardino Sassoli**
+    - **Mulugheta Solomon**
+    """)
+
 def load_references():
     return pd.read_csv("dataset/Datasets_references.csv")
 
@@ -64,6 +74,8 @@ def display_collaborators_by_phase(df):
 def contact_page():
 
     st.title("Contact and Contributors")
+
+    display_local_chapter_leads()
 
     collaborators = load_collaborators()
     display_collaborators_by_phase(collaborators)
