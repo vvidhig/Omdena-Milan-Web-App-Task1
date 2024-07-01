@@ -2,7 +2,15 @@ import streamlit as st
 import pandas as pd
 
 # Read the CSV file
-#collaborators_df = pd.read_csv("dataset/Contributors.csv")
+#dataset_df = pd.read_csv("dataset/Datasets_references.csv")
+
+def load_references():
+    return pd.read_csv("dataset/Datasets_references.csv")
+
+def display_references(df):
+    st.subheader("References")
+    for _, row in df.iterrows():
+        st.write(f"""- [{row['Data source']}]({row['Link']}) - {row['Description']}""")
 
 def load_collaborators():
     df = pd.read_csv("dataset/Contributors.csv")
@@ -60,16 +68,16 @@ def contact_page():
     collaborators = load_collaborators()
     display_collaborators_by_phase(collaborators)
 
-    #st.write(collaborators_df)
-    st.subheader("References")
-    st.write(""" - [Urban Farming Research Paper 1](https://example.com) """)
-    st.write(""" - [Urban Farming Research Paper 2](https://example.com) """)
+    #st.write(dataset_df)
 
-    st.subheader("License")
-    st.write(""" This project is licensed under the MIT License. See the [LICENSE](https://example.com) file for details. """)
+    references = load_references()
+    display_references(references)
+
+    #st.subheader("License")
+    #st.write(""" This project is licensed under the MIT License. See the [LICENSE](https://example.com) file for details. """)
 
     st.subheader("Contact") 
-    st.write("""For any inquiries, please contact us at [email@example.com](mailto:email@example.com) """)
+    st.write("""For any inquiries, please contact us at [contact@omdena.com](mailto:contact@omdena.com) """)
 
 if __name__ == "__main__":
     contact_page()
