@@ -116,15 +116,42 @@ def plot_bar(df):
 
 # Function for EDA/Dashboards/Features Used Page
 def eda_page():
-    st.title("Exploratory Data Analysis")
-    st.header("Feature Distributions and Data Sources")
+    st.markdown(
+        """
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
+        .custom-title {
+            font-family: 'Playwrite DE Grund', sans-serif;
+            font-size: 2em;
+            color: #556B2F; /* color */
+            font-weight: bold;
+        }
+        .custom-header {
+            font-family: 'Playwrite DE Grund', sans-serif;
+            font-size: 1.5em;
+            color: #55a630; /* color */
+        }
+        .custom-text {
+            font-family: 'Playwrite DE Grund', sans-serif;
+            font-size: 1em;
+            color: #540b0e; /* color */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
-    st.write("Here are the features used in the model along with their distributions:")
+    st.markdown('<p class="custom-title">Exploratory Data Analysis (EDA)</p>', unsafe_allow_html=True)
+    st.markdown('<p class="custom-header">Feature Distributions and Data Sources</p>', unsafe_allow_html=True)
 
-    st.write("""
+    st.markdown('<p class="custom-text">Here are the features used in the model along with their distributions:</p>', unsafe_allow_html=True)
+
+    st.markdown("""
+    <p class="custom-text">
     Data was collected from various sources such as satellite imagery, geographical surveys, and climate databases.
     Techniques used include remote sensing, GIS analysis, and environmental monitoring.
-    """)
+    </p>
+    """, unsafe_allow_html=True)
 
     # Looker Studio report URL
     report_url = "https://lookerstudio.google.com/embed/reporting/eaab71cb-575f-4f7c-b9ac-97942e43d017/page/r2W2D"

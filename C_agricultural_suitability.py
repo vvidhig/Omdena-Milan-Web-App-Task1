@@ -7,18 +7,34 @@ def apply_custom_css():
         """
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap');
+        
         .custom-title {
             font-family: 'Playwrite DE Grund', sans-serif;
             font-size: 2.2em;
             color: #665D1E; /* Change to the desired color */
+            font-weight: bold;
         }
         .custom-text {
-            # font-family: "Teko", sans-serif;
+            # font-family: 'Playwrite DE Grund', sans-serif;
             font-size: 1.8em;
             font-weight: 400;
             color: #622F22; /* Change to the desired color */
         }
+
+        .custom-text p{
+            font-family: "Playwrite DE Grund", sans-serif;
+            font-size: 0.5em;
+            color: #622F22; /* Change the color to #8B4513 */
+            text-align: justify;
+        }
+
+        .custom-text h3{
+            font-family: 'Playwrite DE Grund', sans-serif;
+            font-size: 0.8em;
+            font-weight: 400;
+            color: #4CAF50; /* Change to the desired color */
+        }
+
         </style>
         """,
         unsafe_allow_html=True

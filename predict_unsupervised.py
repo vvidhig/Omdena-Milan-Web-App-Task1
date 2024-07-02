@@ -46,6 +46,16 @@ def predict_unsupervised(latitude, longitude):
                 color: #556B2F; /* Olive green color */
                 font-weight: 500;
             }
+            .big-bold-text {
+                font-size: 1.8em;
+                font-weight: bold;
+                color: #D9534F; /* Bootstrap error color */
+            }
+            .big-bold-success {
+                font-size: 1.8em;
+                font-weight: bold;
+                color: #5CB85C; /* Bootstrap success color */
+            }
             </style>
             """,
             unsafe_allow_html=True
@@ -69,10 +79,20 @@ def predict_unsupervised(latitude, longitude):
         cols = st.columns(3)
         for i, (name, value) in enumerate(features):
             cols[i % 3].write(f"<span class='custom-text'>{name}: {value}</span>", unsafe_allow_html=True)
+        
         # Make the prediction
         prediction = model.predict(input_data)
 
         if prediction[0] == 1:
-            st.success("The area is Suitable for Urban Farming")
+            st.markdown("<p class='big-bold-success'>The area is Suitable for Urban Farming</p>", unsafe_allow_html=True)
         else:
-            st.error("The area is Not Suitable for Urban Farming")
+            st.markdown("<p class='big-bold-text'>The area is Not Suitable for Urban Farming</p>", unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    st.title("Agricultural Suitability Prediction")
+    latitude = st.number_input("Enter Latitude", format="%.6f")
+    longitude = st.number_input("Enter Longitude", format="%.6f")
+    if st.button("Predict"):
+        predict_unsupervised(latitude, longitude)
+
+

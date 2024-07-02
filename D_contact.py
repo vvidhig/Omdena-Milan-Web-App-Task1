@@ -1,9 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-# Read the CSV file
-#dataset_df = pd.read_csv("dataset/Datasets_references.csv")
-
+# Function to display local chapter leads
 def display_local_chapter_leads():
     st.write("""
     ## Local Chapter Leads
@@ -14,18 +12,22 @@ def display_local_chapter_leads():
     - **Mulugheta Solomon**
     """)
 
+# Function to load references
 def load_references():
     return pd.read_csv("dataset/Datasets_references.csv")
 
+# Function to display references
 def display_references(df):
     st.subheader("References")
     for _, row in df.iterrows():
         st.write(f"""- [{row['Data source']}]({row['Link']}) - {row['Description']}""")
 
+# Function to load collaborators
 def load_collaborators():
     df = pd.read_csv("dataset/Contributors.csv")
     return df
 
+# Function to display collaborators by phase
 def display_collaborators_by_phase(df):
     phases = df['Phase'].unique()
     for phase in phases:
@@ -72,21 +74,31 @@ def display_collaborators_by_phase(df):
 
 # Function for Contact/Contributors/References/License Page
 def contact_page():
+    # Custom CSS for title
+    st.markdown(
+        """
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
+        .custom-title {
+            font-family: 'Playwrite DE Grund', sans-serif;
+            font-size: 2em;
+            color: #556B2F; /* Olive green color */
+            font-weight: bold;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
-    st.title("Contact and Contributors")
+    st.markdown('<p class="custom-title">Contact and Contributors</p>', unsafe_allow_html=True)
 
     display_local_chapter_leads()
 
     collaborators = load_collaborators()
     display_collaborators_by_phase(collaborators)
 
-    #st.write(dataset_df)
-
     references = load_references()
     display_references(references)
-
-    #st.subheader("License")
-    #st.write(""" This project is licensed under the MIT License. See the [LICENSE](https://example.com) file for details. """)
 
     st.subheader("Contact") 
     st.write("""For any inquiries, please contact us at [contact@omdena.com](mailto:contact@omdena.com) """)

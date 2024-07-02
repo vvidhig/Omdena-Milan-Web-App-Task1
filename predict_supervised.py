@@ -46,6 +46,16 @@ def predict(latitude, longitude):
                 color: #556B2F; /* Olive green color */
                 font-weight: 500;
             }
+            .big-bold-text {
+                font-size: 1.8em;
+                font-weight: bold;
+                color: #D9534F; /* Bootstrap error color */
+            }
+            .big-bold-success {
+                font-size: 1.8em;
+                font-weight: bold;
+                color: #5CB85C; /* Bootstrap success color */
+            }
             </style>
             """,
             unsafe_allow_html=True
@@ -75,7 +85,15 @@ def predict(latitude, longitude):
         prediction = model.predict(input_data)
 
         if prediction[0] == 0:
-            st.error("The area is Not Suitable for Urban Farming")
+            st.markdown("<p class='big-bold-text'>The area is Not Suitable for Urban Farming</p>", unsafe_allow_html=True)
         else:
-            st.success("The area is Suitable for Urban Farming")
+            st.markdown("<p class='big-bold-success'>The area is Suitable for Urban Farming</p>", unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    st.title("Agricultural Suitability Prediction")
+    latitude = st.number_input("Enter Latitude", format="%.6f")
+    longitude = st.number_input("Enter Longitude", format="%.6f")
+    if st.button("Predict"):
+        predict(latitude, longitude)
+
 
