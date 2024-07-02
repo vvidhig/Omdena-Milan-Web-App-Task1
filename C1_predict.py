@@ -30,6 +30,7 @@ def run_app():
             font-family: 'Playwrite US Modern', sans-serif;
             font-size: 2em;
             color: #556B2F; /* Olive green color */
+            font-weight: bold;
         }
         </style>
         """,
