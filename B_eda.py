@@ -6,9 +6,6 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 from pathlib import Path
 
-# Root Path
-root_path = Path(__file__).parent.parent.parent.parent.parent
-
 # Function to classify vegetation based on NDVI value
 def classify_vegetation(ndvi):
     if ndvi < 0.1:
@@ -38,12 +35,9 @@ def plot_histogram(data):
         )
 
     # Update layout
-    fig.update_layout(
-        height=800, width=1000, title_text="Distribution Plots", showlegend=False
-    )
+    fig.update_layout(height=800, width=1000, showlegend=False)
     return fig
 
-# Compute the correlation matrix and plot
 @st.cache_data
 def plot_correlation(df, cols: list[str]):
     correlation_matrix = df[cols].corr()
@@ -62,17 +56,16 @@ def plot_correlation(df, cols: list[str]):
     )
 
     # Update layout
-    fig.update_layout(
-        title="Correlation Matrix of Vegetation Indices", width=800, height=700
-    )
+    fig.update_layout(width=800, height=700)
     return fig
 
-# Scatter plot of geographical data
-@st.cache_data
 def plot_scatter(df):
+    selected_zones = st.multiselect(
+        "Select Zone(s)", options=["zone4", "zone9"], default=["zone4", "zone9"]
+    )
+    filtered_df = df[df["Zone"].isin(selected_zones)]
     x_axis = "Longitude"
     y_axis = "Latitude"
-    title = "Geographical Distribution of Vegetation Classes"
     labels = {
         "longitude": "Longitude",
         "latitude": "Latitude",
@@ -80,11 +73,10 @@ def plot_scatter(df):
     }
     colors = {"Class1": "blue", "Class2": "green", "Class3": "red"}
     fig = px.scatter(
-        df,
+        filtered_df,
         x=x_axis,
         y=y_axis,
         color="class",
-        title=title,
         labels=labels,
         color_discrete_map=colors,
     )
@@ -98,17 +90,27 @@ def plot_scatter(df):
     )
     return fig
 
-# Bar chart
-@st.cache_data
 def plot_bar(df):
+    chosen_zones = st.multiselect(
+        "Select Zone(s)",
+        options=["zone4", "zone9"],
+        default=["zone4", "zone9"],
+        key="zone_select",
+    )
+    filtered_df = df[df["Zone"].isin(chosen_zones)]
+    class_counts = filtered_df["class"].value_counts().reset_index()
+    class_counts.columns = ["class", "count"]
     x_axis = "class"
-    title = "Distribution of Vegetation Classes"
     labels = {"class": "Class", "count": "Count"}
     fig = px.bar(
-        df, x=x_axis, title=title, labels=labels, color_discrete_sequence=["blue"]
+        class_counts,
+        x=x_axis,
+        y="count",  # Specify the y-axis as the count of each class
+        labels=labels,
+        color="class",  # Color bars by class
+        color_discrete_sequence=["#00b6cb"],
     )
-
-    # Customize the layout (optional)
+    # Customize the layout
     fig.update_layout(
         xaxis=dict(title="Class"), yaxis=dict(title="Count"), showlegend=False
     )
@@ -116,42 +118,15 @@ def plot_bar(df):
 
 # Function for EDA/Dashboards/Features Used Page
 def eda_page():
-    st.markdown(
-        """
-        <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
-        .custom-title {
-            font-family: 'Playwrite DE Grund', sans-serif;
-            font-size: 2em;
-            color: #556B2F; /* color */
-            font-weight: bold;
-        }
-        .custom-header {
-            font-family: 'Playwrite DE Grund', sans-serif;
-            font-size: 1.5em;
-            color: #55a630; /* color */
-        }
-        .custom-text {
-            font-family: 'Playwrite DE Grund', sans-serif;
-            font-size: 1em;
-            color: #540b0e; /* color */
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+    st.title("Exploratory Data Analysis")
+    st.header("Feature Distributions and Data Sources")
 
-    st.markdown('<p class="custom-title">Exploratory Data Analysis (EDA)</p>', unsafe_allow_html=True)
-    st.markdown('<p class="custom-header">Feature Distributions and Data Sources</p>', unsafe_allow_html=True)
+    st.write("Here are the features used in the model along with their distributions:")
 
-    st.markdown('<p class="custom-text">Here are the features used in the model along with their distributions:</p>', unsafe_allow_html=True)
-
-    st.markdown("""
-    <p class="custom-text">
+    st.write("""
     Data was collected from various sources such as satellite imagery, geographical surveys, and climate databases.
     Techniques used include remote sensing, GIS analysis, and environmental monitoring.
-    </p>
-    """, unsafe_allow_html=True)
+    """)
 
     # Looker Studio report URL
     report_url = "https://lookerstudio.google.com/embed/reporting/eaab71cb-575f-4f7c-b9ac-97942e43d017/page/r2W2D"
@@ -166,7 +141,7 @@ def eda_page():
 
     # Read CSVs
     # loading ndvi, ndbi and bu(built-up)
-    data = pd.read_csv("dataset/Merged_2014.csv")
+    data = pd.read_parquet("dataset/merged_2023.parquet", engine="pyarrow", dtype_backend="pyarrow")
 
     # Apply the classification function to the NDVI column and create a class column
     data["class"] = data["NDVI"].apply(classify_vegetation)
@@ -180,23 +155,23 @@ def eda_page():
     ]
 
     # Histogram
-    with st.expander("Histogram"):
+    with st.expander("Distribution Plots (Histogram)"):
         hist = plot_histogram(hist_data)
         st.plotly_chart(hist)
 
     # Correlation matrix plot
-    with st.expander("Correlation Matrix"):
+    with st.expander("Correlation Matrix of Vegetation Indices"):
         cols = ["NDVI", "NDBI", "NDWI", "solar_radiation", "SMI", "LST"]
         fig = plot_correlation(data, cols)
         st.plotly_chart(fig)
 
     # Scatter plot
-    with st.expander("Scatter Plot"):
+    with st.expander("Scatter Plot of Geographical Distribution of Vegetation Classes"):
         scatter_vegetation = plot_scatter(data)
         st.plotly_chart(scatter_vegetation, theme="streamlit", use_container_width=True)
 
     # Bar chart
-    with st.expander("Bar Chart"):
+    with st.expander("Bar Chart of Distribution of Vegetation Classes"):
         bar_plot = plot_bar(data)
         st.plotly_chart(bar_plot)
 
