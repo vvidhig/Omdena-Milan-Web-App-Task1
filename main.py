@@ -6,8 +6,10 @@ from B_eda import eda_page as eda
 from C_agricultural_suitability import app as suitability
 from D_contact import contact_page as Contacts
 import warnings
+
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
+# Set page configuration
 st.set_page_config(
     page_title="Agriculture Suitability Analysis",
     page_icon="🌾",
@@ -86,7 +88,6 @@ def load_page(page):
     elif page == "Check Suitable Areas":
         suitability()
     elif page == "EDA Dashboard":
-        # st.write("This page will contain the EDA")
         eda()
     elif page == "Contacts":
         Contacts()
