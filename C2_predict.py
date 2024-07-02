@@ -28,7 +28,7 @@ def app():
         st.rerun()
         
     # Title with custom font and color
-    st.markdown('<p class="custom-title">Predict using Latitude and Longitude</p>', unsafe_allow_html=True)
+    st.markdown('<p class="custom-title">Urban Farming Suitability Prediction</p>', unsafe_allow_html=True)
 
     st.write("""
     Enter the latitude and longitude to predict whether the area is suitable for agriculture.

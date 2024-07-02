@@ -42,7 +42,7 @@ def run_app():
     
 
     # Title with custom font and color
-    st.markdown('<p class="custom-title">Urban Farming Suitability Analysis</p>', unsafe_allow_html=True)
+    st.markdown('<p class="custom-title">Urban Farming Suitability Prediction</p>', unsafe_allow_html=True)
 
     
     # Input fields arranged in rows of four
